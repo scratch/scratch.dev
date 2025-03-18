@@ -6,11 +6,9 @@ export default function PageWrapper({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-gray-50 py-8 font-mono">
-      <div className="container mx-auto max-w-4xl px-4">
-        <div className="rounded-lg bg-white p-6 shadow-sm">
-          {children}
-        </div>
+    <div className="min-h-screen bg-white font-mono">
+      <div className="container mx-auto max-w-4xl px-4 py-8">
+        {children}
       </div>
     </div>
   );
