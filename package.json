@@ -9,8 +9,10 @@
     "preview": "cd system && vite preview"
   },
   "dependencies": {
+    "@types/react-helmet": "^6.1.11",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "@mdx-js/rollup": "^3.0.0",
