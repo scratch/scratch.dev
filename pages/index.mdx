@@ -7,15 +7,6 @@ type: "website"
 lang: "en"
 ---
 
-<div className="not-prose flex justify-center gap-4 mb-0">
-  <a href="https://github.com/scratch/scratch" target="_blank" rel="noopener noreferrer" className="opacity-30 hover:opacity-100 transition-opacity">
-    <img src="/github-mark.svg" alt="GitHub" className="w-6 h-6" />
-  </a>
-  <a href="https://x.com/koomen" target="_blank" rel="noopener noreferrer" className="opacity-30 hover:opacity-100 transition-opacity">
-    <img src="/x-logo.svg?v=2" alt="X" className="w-6 h-6" />
-  </a>
-</div>
-
 <div className="not-prose flex flex-col items-center justify-center mb-8">
   <img src="/scratch-logo.svg" alt="Scratch" height="120" />
 </div>
@@ -41,27 +32,15 @@ Scratch was designed for collaborative writing with coding agents like [Claude C
 
 Scratch supports Github-flavored Markdown features like tables and todolists:
 
-<div className="flex">
-<div className="w-2/5 mt-2">
-
-**Todo:**
-- [x] Write documentation
-- [x] Add code examples
-- [ ] Deploy
-
-</div>
-<div className="w-3/5">
-
 | Feature |  |
 |---------|-----------|
-| Compiles `.md` `.mdx` `.tsx` `.jsx` `.ts` `.js` | ✅ |
+| Compiles `.md` `.mdx` `.tsx` `.ts` `.jsx` `.js` | ✅ 
+| Dev server with HMR | ✅ |
 | Tailwind CSS styling | ✅ |
-| Syntax highlighting | ✅ |
+| Code syntax highlighting | ✅ |
 
-</div>
-</div>
 
-Code blocks use syntax highlighting by [Shiki](https://shiki.style/).
+Code blocks use syntax highlighting by [Shiki](https://shiki.style/):
 
 ```python
 def greet(name: str) -> str:
@@ -74,6 +53,38 @@ You can use React components to <Fire>style text</Fire> or embed fully working d
 
 <TodoList />
 
+You can create a custom `<Files>` component to demonstrate the structure of a directory:
+
+<div className="flex w-full gap-8">
+<div className="flex-1">
+
+```
+<Files>
+  scratch-project
+  ├── pages/
+  │   ├── index.mdx
+  │   ├── Counter.tsx
+  └── public/
+      └── favicon.svg
+  </Files>
+```
+
+</div>
+    <div className="flex-1">
+        <Files>
+            scratch-project
+            ├── pages/
+            │   ├── index.mdx
+            │   ├── Counter.tsx
+            └── public/
+                └── favicon.svg
+        </Files>
+    </div>
+</div>
+
+In fact, coding agents have gotten so good that if you can describe it, you can add it to a document:
+
+<BouncingDvdLogo />
 
 ## No Boilerplate
 
@@ -81,20 +92,23 @@ Scratch uses an opinionated project structure and requires **no boilerplate or c
 
 A simple Scratch project (created with `scratch create`) looks like this:
 
-```
-mysite/
-├── pages/
-│   ├── index.mdx
-│   ├── Counter.tsx
-|   └── examples/
-|       ├── index.md
-|       ├── markdown.md
-|       ├── todolist-spec.mdx
-|       └── todolist.tsx
-└── public/
-    ├── logo.png
-    └── favicon.ico
-```
+<Files>
+    mysite/
+    ├── pages/
+    │   ├── index.mdx
+    │   ├── Counter.tsx
+    │   └── examples/
+    │       ├── index.md
+    │       ├── markdown.md
+    │       ├── todolist-spec.mdx
+    │       └── TodoList.tsx
+    └── public/
+        ├── logo.png
+        └── favicon.svg
+</Files>
+
+
+
 
 Use `scratch build` to compile this project into a [static website](https://scratch.dev/template).
 
@@ -102,15 +116,15 @@ Borrowing heavily from [Tailwind Typography](https://github.com/tailwindlabs/tai
 
 You can change styles and customize the page wrapper component by including the `src/` directory when you run `scratch create`:
 
-```
-mysite/
-├── pages/
-├── public/
-└── src/
-    ├── markdown/
-    ├── PageWrapper.tsx
-    └── tailwind.css
-```
+<Files>
+    mysite/
+    ├── pages/
+    ├── public/
+    └── src/
+        ├── markdown/
+        ├── PageWrapper.tsx
+        └── tailwind.css
+</Files>
 
 Component files and js/ts libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly importated in your .mdx files as long as the filename matches the component name.
 
@@ -124,59 +138,26 @@ Scratch compiles Javascript (.js), Typescript (.ts), JSX (.jsx), TSX (.tsx), Mar
 
 ## Commands
 
-### `scratch create [path]`
-
-Create a new Scratch project. When run interactively, prompts for which template files to include. Use flags to skip prompts.
-
-**Options:**
-- `--src` / `--no-src` - Include or exclude the `src/` directory (default: include)
-- `--examples` / `--no-examples` - Include or exclude example pages (default: include)
-- `--package` / `--no-package` - Include or exclude `package.json` (default: exclude)
-- `--minimal` - Shorthand for `--no-src --no-examples --no-package`
-- `--full` - Shorthand for `--src --examples --package`
-
 ```bash
-scratch create mysite           # Interactive prompts
-scratch create mysite --full    # Include everything
-scratch create mysite --minimal # Minimal project (pages only)
+# Create a new project
+scratch create my-site    # interactive
+scratch create --minimal  # omit src/ and page examples
+scratch create --full     # include src/, examples, and package.json
+
+# Start dev server with hot module reloading
+scratch dev
+
+# Build for production
+scratch build
+scratch build --ssg false    # disable static site generation
+scratch build --development  # unminified, with source maps
+
+# Preview production build locally
+scratch preview
+
+# Remove build artifacts
+scratch clean
+
+# Update scratch to latest version
+scratch update
 ```
-
-### `scratch dev`
-
-Start the development server with hot module replacement. Watches for file changes and automatically rebuilds. Opens your browser to the local server.
-
-```bash
-scratch dev mysite
-```
-
-### `scratch build`
-
-Build your project for production. Compiles all MDX/MD files to static HTML, bundles JavaScript, and processes Tailwind CSS.
-
-**Options:**
-- `--ssg [true/false]` - Enable static site generation to pre-render pages. (default: true)
-- `--development` - Build in development mode (unminified, with source maps)
-
-### `scratch preview`
-
-Preview the production build locally. Serves the `dist/` directory on a local server.
-
-```bash
-scratch preview mysite
-```
-
-### `scratch clean`
-
-Remove build artifacts (`dist/` and `.scratch-build-cache/` directories).xs
-
-### `scratch update`
-
-Update the scratch executable to the latest version
-
-## License
-
-MIT
-
-<div className="text-center text-gray-400 text-sm mt-16">
-  Copyright 2025 Peter Koomen
-</div>
