@@ -53,11 +53,18 @@ function useTodos() {
 
   const addTodo = (text: string) => {
     if (!text.trim()) return;
-    updateTodos([...getTodos(), { id: Date.now(), text: text.trim(), completed: false }]);
+    updateTodos([
+      ...getTodos(),
+      { id: Date.now(), text: text.trim(), completed: false },
+    ]);
   };
 
   const toggleTodo = (id: number) => {
-    updateTodos(getTodos().map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)));
+    updateTodos(
+      getTodos().map((t) =>
+        t.id === id ? { ...t, completed: !t.completed } : t,
+      ),
+    );
   };
 
   const deleteTodo = (id: number) => {
@@ -81,7 +88,7 @@ export default function TodoList() {
   };
 
   return (
-    <div className="not-prose border border-gray-200 dark:border-gray-700 rounded-lg p-4 my-4 mx-16 bg-gray-50 dark:bg-gray-800 shadow-sm">
+    <div className="not-prose border border-gray-200 dark:border-gray-700 rounded-lg p-4 my-12 mx-16 bg-gray-50 dark:bg-gray-800 shadow-sm">
       <div className="flex gap-2 mb-4">
         <input
           type="text"

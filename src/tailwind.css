@@ -61,15 +61,6 @@
   @apply list-disc my-5 pl-6;
 }
 
-/* Task list (checkbox) styling - remove bullets */
-.scratch-prose :where(ul:has(> li > input[type="checkbox"])):not(:where([class~="not-prose"] *)) {
-  @apply list-none pl-2;
-}
-
-.scratch-prose :where(li > input[type="checkbox"]):not(:where([class~="not-prose"] *)) {
-  @apply mr-2;
-}
-
 .scratch-prose :where(ol > li):not(:where([class~="not-prose"] *))::marker,
 .scratch-prose :where(ul > li):not(:where([class~="not-prose"] *))::marker {
   @apply text-gray-400;
@@ -106,6 +97,19 @@
 
 .scratch-prose :where(ul ul, ul ol, ol ul, ol ol):not(:where([class~="not-prose"] *)) {
   @apply my-3;
+}
+
+/* Task lists (checkboxes) - remove bullet points */
+.scratch-prose :where(ul.contains-task-list):not(:where([class~="not-prose"] *)) {
+  @apply list-none pl-0;
+}
+
+.scratch-prose :where(li.task-list-item):not(:where([class~="not-prose"] *)) {
+  @apply pl-0;
+}
+
+.scratch-prose :where(li.task-list-item > input[type="checkbox"]):not(:where([class~="not-prose"] *)) {
+  @apply mr-2 align-middle;
 }
 
 .scratch-prose :where(dl):not(:where([class~="not-prose"] *)) {
@@ -199,7 +203,7 @@
 }
 
 .scratch-prose :where(pre):not(:where([class~="not-prose"] *)) {
-  @apply text-gray-200 bg-gray-800 rounded-lg overflow-x-auto py-3 px-4 my-5 text-sm leading-relaxed;
+  @apply text-gray-800 bg-white rounded-lg overflow-x-auto py-3 px-4 my-5 text-sm leading-relaxed;
 }
 
 .scratch-prose :where(pre code):not(:where([class~="not-prose"] *)) {
@@ -350,10 +354,18 @@
 /* Custom interactive elements */
 .copy-button {
   @apply absolute top-2 right-2 px-2 py-1 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity;
-  @apply text-gray-400 hover:text-gray-200 bg-gray-800;
+  @apply text-gray-500 hover:text-gray-700 bg-gray-200;
 }
 .dark .copy-button {
-  @apply text-gray-500 hover:text-gray-300 bg-gray-700;
+  @apply text-gray-400 hover:text-gray-200 bg-gray-700;
+}
+
+/* Shiki dual theme support - switch to dark theme colors in dark mode */
+.dark .shiki {
+  background-color: var(--shiki-dark-bg) !important;
+}
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
 }
 
 .heading-anchor {

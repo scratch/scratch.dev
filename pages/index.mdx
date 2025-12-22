@@ -61,7 +61,10 @@ Scratch supports Github-flavored Markdown features like tables and todolists:
 </div>
 </div>
 
-Code blocks use syntax highlighting by [Shiki](https://shiki.style/).
+Code blocks use syntax highlighting by [Shiki](https://shiki.style/):
+
+<div className="flex justify-center">
+<div className="w-64">
 
 ```python
 def greet(name: str) -> str:
@@ -69,6 +72,9 @@ def greet(name: str) -> str:
 
 print(greet("World"))
 ```
+
+</div>
+</div>
 
 You can use React components to <Fire>style text</Fire> or embed fully working demos in your product specs:
 
@@ -81,29 +87,29 @@ You can create a custom `<Files>` component to demonstrate the structure of a di
 
 ```
 <Files>
-my-project
-├── pages/
-│   ├── index.mdx
-│   ├── Counter.tsx
-└── public/
-    └── favicon.svg
-</Files>
+  my-project
+  ├── pages/
+  │   ├── index.mdx
+  │   ├── Counter.tsx
+  └── public/
+      └── favicon.svg
+  </Files>
 ```
 
 </div>
-<div className="flex-1">
-<Files>
-my-project
-├── pages/
-│   ├── index.mdx
-│   ├── Counter.tsx
-└── public/
-    └── favicon.svg
-</Files>
-</div>
+    <div className="flex-1">
+        <Files>
+            my-project
+            ├── pages/
+            │   ├── index.mdx
+            │   ├── Counter.tsx
+            └── public/
+                └── favicon.svg
+        </Files>
+    </div>
 </div>
 
-
+In fact, coding agents have gotten so good that if you can describe it, 
 
 ## No Boilerplate
 
@@ -112,18 +118,18 @@ Scratch uses an opinionated project structure and requires **no boilerplate or c
 A simple Scratch project (created with `scratch create`) looks like this:
 
 <Files>
-mysite/
-├── pages/
-│   ├── index.mdx
-│   ├── Counter.tsx
-│   └── examples/
-│       ├── index.md
-│       ├── markdown.md
-│       ├── todolist-spec.mdx
-│       └── todolist.tsx
-└── public/
-    ├── logo.png
-    └── favicon.svg
+    mysite/
+    ├── pages/
+    │   ├── index.mdx
+    │   ├── Counter.tsx
+    │   └── examples/
+    │       ├── index.md
+    │       ├── markdown.md
+    │       ├── todolist-spec.mdx
+    │       └── todolist.tsx
+    └── public/
+        ├── logo.png
+        └── favicon.svg
 </Files>
 
 
@@ -136,13 +142,13 @@ Borrowing heavily from [Tailwind Typography](https://github.com/tailwindlabs/tai
 You can change styles and customize the page wrapper component by including the `src/` directory when you run `scratch create`:
 
 <Files>
-mysite/
-├── pages/
-├── public/
-└── src/
-    ├── markdown/
-    ├── PageWrapper.tsx
-    └── tailwind.css
+    mysite/
+    ├── pages/
+    ├── public/
+    └── src/
+        ├── markdown/
+        ├── PageWrapper.tsx
+        └── tailwind.css
 </Files>
 
 Component files and js/ts libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly importated in your .mdx files as long as the filename matches the component name.

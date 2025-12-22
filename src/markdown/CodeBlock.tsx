@@ -19,6 +19,13 @@ export function CodeBlock({ children, className, style, ...props }: CodeBlockPro
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // Filter out background styles from Shiki to let CSS control it
+  const filteredStyle = style ? Object.fromEntries(
+    Object.entries(style).filter(([key]) =>
+      !key.toLowerCase().includes('background')
+    )
+  ) : undefined;
+
   return (
     <div className="relative group">
       <button
@@ -28,7 +35,7 @@ export function CodeBlock({ children, className, style, ...props }: CodeBlockPro
       >
         {copied ? 'Copied!' : 'Copy'}
       </button>
-      <pre ref={preRef} className={className} style={style} {...props}>
+      <pre ref={preRef} className={className} style={filteredStyle} {...props}>
         {children}
       </pre>
     </div>
