@@ -41,25 +41,13 @@ Scratch was designed for collaborative writing with coding agents like [Claude C
 
 Scratch supports Github-flavored Markdown features like tables and todolists:
 
-<div className="flex w-full gap-6 my-9">
-<div className="w-2/5 px-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
-
-**Todo:**
-- [x] Write documentation
-- [x] Add code examples
-- [ ] Deploy
-
-</div>
-<div className="w-3/5 px-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
-
 | Feature |  |
 |---------|-----------|
-| Compiles `.md` `.mdx` `.tsx` `.jsx` `.ts` `.js` | ✅ |
+| Compiles `.md` `.mdx` `.tsx` `.ts` `.jsx` `.js` | ✅ 
+| Dev server with HMR | ✅ |
 | Tailwind CSS styling | ✅ |
-| Syntax highlighting | ✅ |
+| Code syntax highlighting | ✅ |
 
-</div>
-</div>
 
 Code blocks use syntax highlighting by [Shiki](https://shiki.style/):
 
@@ -122,7 +110,7 @@ A simple Scratch project (created with `scratch create`) looks like this:
     │       ├── index.md
     │       ├── markdown.md
     │       ├── todolist-spec.mdx
-    │       └── todolist.tsx
+    │       └── TodoList.tsx
     └── public/
         ├── logo.png
         └── favicon.svg
