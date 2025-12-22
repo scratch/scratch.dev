@@ -88,7 +88,7 @@ export default function TodoList() {
   };
 
   return (
-    <div className="not-prose border border-gray-200 dark:border-gray-700 rounded-lg p-4 my-12 mx-16 bg-gray-50 dark:bg-gray-800 shadow-sm">
+    <div className="not-prose border border-gray-200 dark:border-gray-700 rounded-lg p-4 my-12 mx-16 bg-gray-50 dark:bg-gray-800/50">
       <div className="flex gap-2 mb-4">
         <input
           type="text"

@@ -41,8 +41,8 @@ Scratch was designed for collaborative writing with coding agents like [Claude C
 
 Scratch supports Github-flavored Markdown features like tables and todolists:
 
-<div className="flex">
-<div className="w-2/5 mt-2">
+<div className="flex w-full gap-6 my-6">
+<div className="w-2/5 px-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
 
 **Todo:**
 - [x] Write documentation
@@ -50,7 +50,7 @@ Scratch supports Github-flavored Markdown features like tables and todolists:
 - [ ] Deploy
 
 </div>
-<div className="w-3/5">
+<div className="w-3/5 px-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
 
 | Feature |  |
 |---------|-----------|
@@ -63,8 +63,7 @@ Scratch supports Github-flavored Markdown features like tables and todolists:
 
 Code blocks use syntax highlighting by [Shiki](https://shiki.style/):
 
-<div className="flex justify-center">
-<div className="w-64">
+<div className="ml-8 w-72">
 
 ```python
 def greet(name: str) -> str:
@@ -73,7 +72,6 @@ def greet(name: str) -> str:
 print(greet("World"))
 ```
 
-</div>
 </div>
 
 You can use React components to <Fire>style text</Fire> or embed fully working demos in your product specs:
@@ -87,7 +85,7 @@ You can create a custom `<Files>` component to demonstrate the structure of a di
 
 ```
 <Files>
-  my-project
+  scratch-project
   ├── pages/
   │   ├── index.mdx
   │   ├── Counter.tsx
@@ -99,7 +97,7 @@ You can create a custom `<Files>` component to demonstrate the structure of a di
 </div>
     <div className="flex-1">
         <Files>
-            my-project
+            scratch-project
             ├── pages/
             │   ├── index.mdx
             │   ├── Counter.tsx
@@ -109,7 +107,9 @@ You can create a custom `<Files>` component to demonstrate the structure of a di
     </div>
 </div>
 
-In fact, coding agents have gotten so good that if you can describe it, 
+In fact, coding agents have gotten so good that if you can describe it, you can add it to a document:
+
+<BouncingDvdLogo />
 
 ## No Boilerplate
 
