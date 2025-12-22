@@ -28,13 +28,13 @@ scratch dev
 
 ## What can you do with Scratch?
 
-Scratch was designed for collaborative writing with coding agents like [Claude Code](https://www.claude.com/product/claude-code). Use your favorite editor to write in [Markdown](https://daringfireball.net/projects/markdown/) and embed React components when it's easier to express yourselve with code.
+Scratch was designed for collaborative writing with coding agents like [Claude Code](https://www.claude.com/product/claude-code). Use your favorite editor to write in [Markdown](https://daringfireball.net/projects/markdown/) and embed React components when it's easier to express yourself with code.
 
 Scratch supports Github-flavored Markdown features like tables and todolists:
 
 | Feature |  |
 |---------|-----------|
-| Compiles `.md` `.mdx` `.tsx` `.ts` `.jsx` `.js` | ✅ 
+| Compiles `.md` `.mdx` `.tsx` `.ts` `.jsx` `.js` | ✅ |
 | Dev server with HMR | ✅ |
 | Tailwind CSS styling | ✅ |
 | Code syntax highlighting | ✅ |
@@ -107,9 +107,6 @@ A simple Scratch project (created with `scratch create`) looks like this:
         └── favicon.svg
 </Files>
 
-
-
-
 Use `scratch build` to compile this project into a [static website](https://scratch.dev/template).
 
 Borrowing heavily from [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography), Scratch uses default styles and Markdown components to render your prose with a clean aesthetic. Code blocks use syntax highlighting by [Shiki](https://shiki.style/).
@@ -126,15 +123,15 @@ You can change styles and customize the page wrapper component by including the 
         └── tailwind.css
 </Files>
 
-Component files and js/ts libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly importated in your .mdx files as long as the filename matches the component name.
+Component files and js/ts libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly imported in your .mdx files as long as the filename matches the component name.
 
-Scratch installs build dependencies You can add third-party dependencies by including a `package.json` file in your project root.
+Scratch installs build dependencies automatically. You can add additional third-party dependencies by including a `package.json` file in your project root.
 
 ## Built on Bun
 
 Scratch is built on [Bun](https://bun.com/) for lightning-fast builds, development with HMR, and native typescript support. It uses the [Tailwind CSS](https://tailwindcss.com/) framework to make component styling easy. 
 
-Scratch compiles Javascript (.js), Typescript (.ts), JSX (.jsx), TSX (.tsx), Markdown (.md), and MDX (.mdx
+Scratch compiles Javascript (.js), Typescript (.ts), JSX (.jsx), TSX (.tsx), Markdown (.md), and MDX (.mdx).
 
 ## Commands
 
