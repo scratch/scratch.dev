@@ -147,49 +147,26 @@ Scratch compiles Javascript (.js), Typescript (.ts), JSX (.jsx), TSX (.tsx), Mar
 
 ## Commands
 
-### create
+```bash
+# Create a new project
+scratch create my-site    # interactive
+scratch create --minimal  # omit src/ and page examples
+scratch create --full     # include src/, examples, and package.json
 
-`scratch create [path]`
+# Start dev server with hot reload
+scratch dev
 
-Create a new Scratch project. When run interactively, prompts for which template files to include. Use flags to skip prompts.
+# Build for production
+scratch build
+scratch build --ssg false    # disable static site generation
+scratch build --development  # unminified, with source maps
 
-**Options:**
-- `--src` / `--no-src` - Include or exclude the `src/` directory (default: include)
-- `--examples` / `--no-examples` - Include or exclude example pages (default: include)
-- `--package` / `--no-package` - Include or exclude `package.json` (default: exclude)
-- `--minimal` - Shorthand for `--no-src --no-examples --no-package`
-- `--full` - Shorthand for `--src --examples --package`
+# Preview production build locally
+scratch preview
 
-### dev 
+# Remove build artifacts
+scratch clean
 
-`scratch dev`
-
-Start the development server with hot module replacement. Watches for file changes and automatically rebuilds. Opens your browser to the local server.
-
-### build 
-
-`scratch build`
-
-Build your project for production. Compiles all MDX/MD files to static HTML, bundles JavaScript, and processes Tailwind CSS.
-
-**Options:**
-- `--ssg [true/false]` - Enable static site generation to pre-render pages. (default: true)
-- `--development` - Build in development mode (unminified, with source maps)
-
-### preview 
-
-`scratch preview`
-
-Preview the production build locally. Serves the `dist/` directory on a local server.
-
-### clean 
-
-`scratch clean`
-
-Remove build artifacts (`dist/` and `.scratch-build-cache/` directories).xs
-
-### update
-
-`scratch update`
-
-Update the scratch executable to the latest version
+# Update scratch to latest version
+scratch update
+```
