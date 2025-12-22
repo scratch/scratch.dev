@@ -1,8 +1,19 @@
-<p align="center">
+---
+title: "Scratch"
+description: "A CLI for building static MDX websites with Bun"
+keywords: ["MDX", "static site", "React", "Bun", "markdown"]
+author: "Scratch"
+type: "website"
+lang: "en"
+---
+
+<div className="not-prose flex flex-col items-center justify-center mb-8">
   <img src="/scratch-logo.svg" alt="Scratch" height="120" />
-  <br />
-  Make beautiful websites with Markdown and React
-</p>
+</div>
+
+Scratch makes beautiful static websites with Markdown and React.
+
+Scratch was designed for collaborative writing with coding agents like [Claude Code](https://www.claude.com/product/claude-code). Use your favorite editor to write in [Markdown](https://daringfireball.net/projects/markdown/) and embed React components when it's easier to express yourselve with code.
 
 ## Quick Start
 
@@ -17,17 +28,23 @@ scratch create
 scratch dev
 ```
 
-## Why Scratch?
+## What can you do with Scratch?
 
-Scratch was designed for **collaborative writing with coding agents** like [Claude Code](https://www.claude.com/product/claude-code). Use your favorite editor to write in [Markdown](https://daringfireball.net/projects/markdown/) and embed React components when it's easier to express yourselve with code.
+Scratch compiles Markdown (.md, .mdx) and React (.tsx, .ts, .jsx, js) into beautiful static websites that can be hosted anywhere.
 
-Scratch uses an opinionated project structure and requires **no boilerplate or configuration**: just create a project, run the dev server with `scratch dev`, and start writing.
+Write in Markdown, and embed React components, like this counter:
 
-When you're ready, `scratch build` your project into a static website that can be hosted anywhere.
+<Counter />
+
+Use components to style text <Fire>like this</Fire>
+
+
 
 ## No Boilerplate
 
-Scratch uses an opionated project structure to avoid the need for boilerplate and configuration. A simple Scratch project (created with `scratch create`) looks like this:
+Scratch uses an opinionated project structure and requires **no boilerplate or configuration**: just create a project, run the dev server with `scratch dev`, and start writing.
+
+A simple Scratch project (created with `scratch create`) looks like this:
 
 ```
 mysite/
