@@ -5,7 +5,8 @@ node_modules
 
 # output
 out
-dist
+# check in compiled output for now; cloudflare pages can't install scratch to build this
+# dist
 *.tgz
 
 # code coverage
