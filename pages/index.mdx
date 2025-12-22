@@ -147,7 +147,9 @@ Scratch compiles Javascript (.js), Typescript (.ts), JSX (.jsx), TSX (.tsx), Mar
 
 ## Commands
 
-### `scratch create [path]`
+### create
+
+`scratch create [path]`
 
 Create a new Scratch project. When run interactively, prompts for which template files to include. Use flags to skip prompts.
 
@@ -158,21 +160,15 @@ Create a new Scratch project. When run interactively, prompts for which template
 - `--minimal` - Shorthand for `--no-src --no-examples --no-package`
 - `--full` - Shorthand for `--src --examples --package`
 
-```bash
-scratch create mysite           # Interactive prompts
-scratch create mysite --full    # Include everything
-scratch create mysite --minimal # Minimal project (pages only)
-```
+### dev 
 
-### `scratch dev`
+`scratch dev`
 
 Start the development server with hot module replacement. Watches for file changes and automatically rebuilds. Opens your browser to the local server.
 
-```bash
-scratch dev mysite
-```
+### build 
 
-### `scratch build`
+`scratch build`
 
 Build your project for production. Compiles all MDX/MD files to static HTML, bundles JavaScript, and processes Tailwind CSS.
 
@@ -180,19 +176,20 @@ Build your project for production. Compiles all MDX/MD files to static HTML, bun
 - `--ssg [true/false]` - Enable static site generation to pre-render pages. (default: true)
 - `--development` - Build in development mode (unminified, with source maps)
 
-### `scratch preview`
+### preview 
+
+`scratch preview`
 
 Preview the production build locally. Serves the `dist/` directory on a local server.
 
-```bash
-scratch preview mysite
-```
+### clean 
 
-### `scratch clean`
+`scratch clean`
 
 Remove build artifacts (`dist/` and `.scratch-build-cache/` directories).xs
 
-### `scratch update`
+### update
+
+`scratch update`
 
 Update the scratch executable to the latest version
-
