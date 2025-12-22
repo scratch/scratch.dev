@@ -7,7 +7,7 @@ import React from 'react';
  */
 export default function PageWrapper({ children }) {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 scratch-prose max-w-2xl mx-auto px-6 py-16">
+    <div className="min-h-screen bg-white dark:bg-gray-900 scratch-prose max-w-2xl mx-auto px-6 py-8">
       {children}
     </div>
   );

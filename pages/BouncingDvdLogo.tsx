@@ -78,39 +78,58 @@ export default function BouncingDvdLogo() {
   }, [velocity]);
 
   return (
-    <div className="not-prose my-6">
-      <div
-        ref={containerRef}
-        className="relative w-full h-48 bg-gray-900 rounded-lg overflow-hidden border border-gray-700"
-      >
-        <div
-          className="absolute"
-          style={{
-            left: position.x,
-            top: position.y,
-            width: logoWidth,
-            height: logoHeight,
-          }}
-        >
+    <div className="not-prose my-6 mx-12">
+      {/* TV outer frame */}
+      <div className="bg-gradient-to-b from-gray-700 via-gray-800 to-gray-900 p-3 rounded-2xl shadow-xl">
+        {/* TV screen bezel */}
+        <div className="bg-black p-1 rounded-lg">
+          {/* Screen container */}
           <div
-            className="transition-colors duration-300"
+            ref={containerRef}
+            className="relative w-full h-48 rounded overflow-hidden"
             style={{
-              width: "100%",
-              height: "100%",
-              backgroundColor: color,
-              maskImage: "url(/DVD_logo.svg)",
-              maskSize: "contain",
-              maskRepeat: "no-repeat",
-              maskPosition: "center",
-              WebkitMaskImage: "url(/DVD_logo.svg)",
-              WebkitMaskSize: "contain",
-              WebkitMaskRepeat: "no-repeat",
-              WebkitMaskPosition: "center",
+              background: "linear-gradient(145deg, #1a1a2e 0%, #0f0f1a 50%, #1a1a2e 100%)",
             }}
-          />
+          >
+            {/* Bouncing logo */}
+            <div
+              className="absolute"
+              style={{
+                left: position.x,
+                top: position.y,
+                width: logoWidth,
+                height: logoHeight,
+              }}
+            >
+              <div
+                className="transition-colors duration-300"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: color,
+                  maskImage: "url(/DVD_logo.svg)",
+                  maskSize: "contain",
+                  maskRepeat: "no-repeat",
+                  maskPosition: "center",
+                  WebkitMaskImage: "url(/DVD_logo.svg)",
+                  WebkitMaskSize: "contain",
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                }}
+              />
+            </div>
+
+            {/* Screen reflection overlay */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%, transparent 100%)",
+              }}
+            />
+          </div>
         </div>
       </div>
-      <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-2">
+      <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-3">
         Corner hits: {cornerHits}
       </p>
     </div>
