@@ -54,7 +54,7 @@ Error generating stack: `+H.message+`
 `,T(Y.span,{className:"line",children:[q(Y.span,{style:{color:"#B392F0"},children:"scratch"}),q(Y.span,{style:{color:"#9ECBFF"},children:" create"}),q(Y.span,{style:{color:"#79B8FF"},children:" --minimal"}),q(Y.span,{style:{color:"#6A737D"},children:"  # omit src/ and page examples"})]}),`
 `,T(Y.span,{className:"line",children:[q(Y.span,{style:{color:"#B392F0"},children:"scratch"}),q(Y.span,{style:{color:"#9ECBFF"},children:" create"}),q(Y.span,{style:{color:"#79B8FF"},children:" --full"}),q(Y.span,{style:{color:"#6A737D"},children:"     # include src/, examples, and package.json"})]}),`
 `,q(Y.span,{className:"line"}),`
-`,q(Y.span,{className:"line",children:q(Y.span,{style:{color:"#6A737D"},children:"# Start dev server with hot reload"})}),`
+`,q(Y.span,{className:"line",children:q(Y.span,{style:{color:"#6A737D"},children:"# Start dev server with hot module reloading"})}),`
 `,T(Y.span,{className:"line",children:[q(Y.span,{style:{color:"#B392F0"},children:"scratch"}),q(Y.span,{style:{color:"#9ECBFF"},children:" dev"})]}),`
 `,q(Y.span,{className:"line"}),`
 `,q(Y.span,{className:"line",children:q(Y.span,{style:{color:"#6A737D"},children:"# Build for production"})}),`
