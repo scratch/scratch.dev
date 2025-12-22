@@ -11,9 +11,7 @@ lang: "en"
   <img src="/scratch-logo.svg" alt="Scratch" height="120" />
 </div>
 
-Scratch makes beautiful static websites with Markdown and React.
-
-Scratch was designed for collaborative writing with coding agents like [Claude Code](https://www.claude.com/product/claude-code). Use your favorite editor to write in [Markdown](https://daringfireball.net/projects/markdown/) and embed React components when it's easier to express yourselve with code.
+Scratch compiles Markdown and React into beautiful static websites that can be hosted anywhere.
 
 ## Quick Start
 
@@ -30,14 +28,43 @@ scratch dev
 
 ## What can you do with Scratch?
 
-Scratch compiles Markdown (.md, .mdx) and React (.tsx, .ts, .jsx, js) into beautiful static websites that can be hosted anywhere.
+Scratch was designed for collaborative writing with coding agents like [Claude Code](https://www.claude.com/product/claude-code). Use your favorite editor to write in [Markdown](https://daringfireball.net/projects/markdown/) and embed React components when it's easier to express yourselve with code.
 
-Write in Markdown, and embed React components, like this counter:
+Scratch supports Github-flavored Markdown features like tables and todolists:
 
-<Counter />
+<div className="flex">
+<div className="w-2/5 mt-2">
 
-Use components to style text <Fire>like this</Fire>
+**Todo:**
+- [x] Write documentation
+- [x] Add code examples
+- [ ] Deploy
 
+</div>
+<div className="w-3/5">
+
+| Feature |  |
+|---------|-----------|
+| Compiles `.md` `.mdx` `.tsx` `.jsx` `.ts` `.js` | ✅ |
+| Dev server with HMR | ✅ |
+| Tailwind CSS styling | ✅ |
+| Syntax highlighting | ✅ |
+
+</div>
+</div>
+
+Code blocks use syntax highlighting by [Shiki](https://shiki.style/).
+
+```python
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+
+print(greet("World"))
+```
+
+You can use React components to <Fire>style text</Fire> or embed fully working demos in your product specs:
+
+<TodoList />
 
 
 ## No Boilerplate
@@ -91,7 +118,7 @@ Scratch compiles Javascript (.js), Typescript (.ts), JSX (.jsx), TSX (.tsx), Mar
 
 ### `scratch create [path]`
 
-Create a new Scratch project. When run interactively, prompts for which components to include. Use flags to skip prompts.
+Create a new Scratch project. When run interactively, prompts for which template files to include. Use flags to skip prompts.
 
 **Options:**
 - `--src` / `--no-src` - Include or exclude the `src/` directory (default: include)
