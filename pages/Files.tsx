@@ -109,7 +109,7 @@ function FileRow({ node }: { node: FileNode }) {
       )}
 
       {/* File/folder name */}
-      <span className={`flex items-center ${isFolder ? "text-gray-700" : "text-gray-600"}`}>
+      <span className={`flex items-center ${isFolder ? "text-gray-700 font-bold" : "text-gray-600"}`}>
         {node.name}
       </span>
     </div>
@@ -142,7 +142,7 @@ export default function Files({ children }: { children: React.ReactNode }) {
   const nodes = parseTree(text);
 
   return (
-    <div className="not-prose my-6 py-4 px-4 bg-gray-50 rounded-lg border border-gray-200">
+    <div className="not-prose my-6 py-4 px-4">
       {nodes.map((node, i) => (
         <FileRow key={i} node={node} />
       ))}

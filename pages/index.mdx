@@ -32,6 +32,8 @@ Scratch was designed for collaborative writing with coding agents like [Claude C
 
 Scratch supports Github-flavored Markdown features like tables and todolists:
 
+<div className="flex justify-center">
+
 | Feature | Supported? |
 |---------|-----------|
 | Compiles `.md` `.mdx` `.tsx` `.ts` `.jsx` `.js` | ✅ |
@@ -39,8 +41,12 @@ Scratch supports Github-flavored Markdown features like tables and todolists:
 | Tailwind CSS styling | ✅ |
 | Code syntax highlighting | ✅ |
 
+</div>
+
 
 Code blocks use syntax highlighting by [Shiki](https://shiki.style/):
+
+<div className="ml-16">
 
 ```python
 def greet(name: str) -> str:
@@ -48,6 +54,8 @@ def greet(name: str) -> str:
 
 print(greet("World"))
 ```
+
+</div>
 
 You can use React components to <Fire>style text</Fire> or embed fully working demos in your product specs:
 
