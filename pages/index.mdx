@@ -32,15 +32,21 @@ Scratch was designed for collaborative writing with coding agents like [Claude C
 
 Scratch supports Github-flavored Markdown features like tables and todolists:
 
-| Feature |  |
+<div className="flex justify-center">
+
+| Feature | Supported? |
 |---------|-----------|
 | Compiles `.md` `.mdx` `.tsx` `.ts` `.jsx` `.js` | ✅ |
 | Dev server with HMR | ✅ |
 | Tailwind CSS styling | ✅ |
 | Code syntax highlighting | ✅ |
 
+</div>
+
 
 Code blocks use syntax highlighting by [Shiki](https://shiki.style/):
+
+<div className="ml-16">
 
 ```python
 def greet(name: str) -> str:
@@ -49,38 +55,11 @@ def greet(name: str) -> str:
 print(greet("World"))
 ```
 
+</div>
+
 You can use React components to <Fire>style text</Fire> or embed fully working demos in your product specs:
 
 <TodoList />
-
-You can create a custom `<Files>` component to demonstrate the structure of a directory:
-
-<div className="flex w-full gap-8">
-<div className="flex-1">
-
-```
-<Files>
-  scratch-project
-  ├── pages/
-  │   ├── index.mdx
-  │   ├── Counter.tsx
-  └── public/
-      └── favicon.svg
-  </Files>
-```
-
-</div>
-    <div className="flex-1">
-        <Files>
-            scratch-project
-            ├── pages/
-            │   ├── index.mdx
-            │   ├── Counter.tsx
-            └── public/
-                └── favicon.svg
-        </Files>
-    </div>
-</div>
 
 In fact, coding agents have gotten so good that if you can describe it, you can add it to a document:
 

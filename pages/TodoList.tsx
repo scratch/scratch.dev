@@ -88,7 +88,7 @@ export default function TodoList() {
   };
 
   return (
-    <div className="not-prose border border-gray-200 dark:border-gray-700 rounded-lg p-4 my-12 mx-16 bg-gray-50 dark:bg-gray-800/50">
+    <div className="not-prose border border-gray-200 rounded-lg p-4 my-12 mx-16 bg-gray-50">
       <div className="flex gap-2 mb-4">
         <input
           type="text"
@@ -96,18 +96,18 @@ export default function TodoList() {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleAdd()}
           placeholder="Add a todo..."
-          className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400"
+          className="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 placeholder-gray-400"
         />
         <button
           onClick={handleAdd}
-          className="px-4 py-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-md hover:bg-gray-700 dark:hover:bg-gray-300 transition-colors"
+          className="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-700 transition-colors"
         >
           Add
         </button>
       </div>
 
       {todos.length === 0 ? (
-        <p className="text-gray-500 dark:text-gray-400 text-center py-4">
+        <p className="text-gray-500 text-center py-4">
           No todos yet. Add one above!
         </p>
       ) : (
@@ -115,26 +115,26 @@ export default function TodoList() {
           {todos.map((todo) => (
             <li
               key={todo.id}
-              className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800"
+              className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50"
             >
               <input
                 type="checkbox"
                 checked={todo.completed}
                 onChange={() => toggleTodo(todo.id)}
-                className="w-4 h-4 rounded border-gray-300 dark:border-gray-600"
+                className="w-4 h-4 rounded border-gray-300"
               />
               <span
                 className={`flex-1 ${
                   todo.completed
-                    ? "line-through text-gray-400 dark:text-gray-500"
-                    : "text-gray-900 dark:text-gray-100"
+                    ? "line-through text-gray-400"
+                    : "text-gray-900"
                 }`}
               >
                 {todo.text}
               </span>
               <button
                 onClick={() => deleteTodo(todo.id)}
-                className="text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400 transition-colors"
+                className="text-gray-400 hover:text-red-500 transition-colors"
                 aria-label="Delete todo"
               >
                 <svg
@@ -155,13 +155,13 @@ export default function TodoList() {
         </ul>
       )}
 
-      <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
-        <span className="text-sm text-gray-500 dark:text-gray-400">
+      <div className="mt-4 pt-4 border-t border-gray-200 flex justify-between items-center">
+        <span className="text-sm text-gray-500">
           {todos.filter((t) => !t.completed).length} remaining
         </span>
         <button
           onClick={reset}
-          className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+          className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
         >
           Reset
         </button>

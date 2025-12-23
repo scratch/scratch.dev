@@ -89,7 +89,7 @@ function FileRow({ node }: { node: FileNode }) {
       {node.parentIsLast.map((parentLast, i) => (
         <div key={i} className="w-5 flex-shrink-0 relative">
           {!parentLast && (
-            <div className="absolute left-2 top-0 bottom-0 w-px bg-gray-300 dark:bg-gray-600" />
+            <div className="absolute left-2 top-0 bottom-0 w-px bg-gray-300" />
           )}
         </div>
       ))}
@@ -99,17 +99,17 @@ function FileRow({ node }: { node: FileNode }) {
         <div className="w-5 flex-shrink-0 relative">
           {/* Vertical line (full height if not last, half if last) */}
           <div
-            className={`absolute left-2 w-px bg-gray-300 dark:bg-gray-600 ${
+            className={`absolute left-2 w-px bg-gray-300 ${
               node.isLast ? "top-0 h-1/2" : "top-0 bottom-0"
             }`}
           />
           {/* Horizontal line */}
-          <div className="absolute left-2 top-1/2 w-3 h-px bg-gray-300 dark:bg-gray-600" />
+          <div className="absolute left-2 top-1/2 w-3 h-px bg-gray-300" />
         </div>
       )}
 
       {/* File/folder name */}
-      <span className={`flex items-center ${isFolder ? "text-gray-700 dark:text-gray-300" : "text-gray-600 dark:text-gray-400"}`}>
+      <span className={`flex items-center ${isFolder ? "text-gray-700 font-bold" : "text-gray-600"}`}>
         {node.name}
       </span>
     </div>
@@ -142,7 +142,7 @@ export default function Files({ children }: { children: React.ReactNode }) {
   const nodes = parseTree(text);
 
   return (
-    <div className="not-prose my-6 py-4 px-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
+    <div className="not-prose my-6 py-4 px-4">
       {nodes.map((node, i) => (
         <FileRow key={i} node={node} />
       ))}
