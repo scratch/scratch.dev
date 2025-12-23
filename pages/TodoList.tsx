@@ -88,7 +88,7 @@ export default function TodoList() {
   };
 
   return (
-    <div className="not-prose border border-gray-200 rounded-lg p-4 my-12 mx-16 bg-gray-50">
+    <div className="not-prose border border-gray-200 rounded-lg p-4 my-12 mx-2 sm:mx-8 md:mx-16 bg-gray-50">
       <div className="flex gap-2 mb-4">
         <input
           type="text"
@@ -115,7 +115,7 @@ export default function TodoList() {
           {todos.map((todo) => (
             <li
               key={todo.id}
-              className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50"
+              className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100"
             >
               <input
                 type="checkbox"
