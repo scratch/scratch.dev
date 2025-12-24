@@ -25,16 +25,16 @@ function parseTree(text: string): TreeNode[] {
   const lines = text.split("\n").filter((line) => line.trim().length > 0);
   if (lines.length === 0) return [];
 
-  // Parse lines - support both whitespace and dot-prefix for indentation
+  // Parse lines - support both whitespace and dash-prefix for indentation
   const items = lines.map((line, index) => {
-    const dotMatch = line.match(/^(\.+)/);
+    const dashMatch = line.match(/^(-+)/);
     let name: string;
     let indent: number;
     let comment: string | undefined;
 
-    if (dotMatch) {
-      name = line.slice(dotMatch[1].length);
-      indent = dotMatch[1].length;
+    if (dashMatch) {
+      name = line.slice(dashMatch[1].length);
+      indent = dashMatch[1].length;
     } else {
       name = line.trim();
       indent = line.length - line.trimStart().length;
@@ -153,46 +153,56 @@ interface FileRowProps {
 
 function FileRow({ node, isCollapsed, onToggle }: FileRowProps) {
   const isClickable = node.isFolder;
+  const isDotfile = node.name.startsWith(".");
 
   return (
-    <div
-      className="flex items-center h-7 font-mono text-sm"
-      style={{ paddingLeft: `${node.depth * 1}rem` }}
-    >
-      {/* Caret for folders */}
-      {isClickable ? (
-        <button
-          onClick={onToggle}
-          className="w-4 flex-shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-600"
-        >
-          <svg
-            width="8"
-            height="8"
-            viewBox="0 0 8 8"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={isCollapsed ? "" : "rotate-90"}
-          >
-            <path d="M2 1L6 4L2 7" />
-          </svg>
-        </button>
-      ) : (
-        <div className="w-4 flex-shrink-0" />
-      )}
-
-      <span
-        className={`flex items-center ${
-          node.isFolder ? "text-gray-500 font-bold" : "text-gray-600"
-        } ${isClickable ? "cursor-pointer hover:text-gray-800 select-none" : ""}`}
-        onClick={isClickable ? onToggle : undefined}
+    <div className="flex items-center h-7 font-mono text-sm">
+      {/* Left side: indent + caret + name */}
+      <div
+        className="flex items-center w-48 flex-shrink-0"
+        style={{ paddingLeft: `${node.depth * 1}rem` }}
       >
-        {node.name}
-      </span>
+        {/* Caret for folders */}
+        {isClickable ? (
+          <button
+            onClick={onToggle}
+            className="w-4 flex-shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-600 cursor-pointer"
+          >
+            <svg
+              width="8"
+              height="8"
+              viewBox="0 0 8 8"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={isCollapsed ? "" : "rotate-90"}
+            >
+              <path d="M2 1L6 4L2 7" />
+            </svg>
+          </button>
+        ) : (
+          <div className="w-4 flex-shrink-0" />
+        )}
+
+        <span
+          className={`flex items-center ${
+            isDotfile
+              ? "text-gray-400"
+              : node.isFolder
+                ? "text-gray-500 font-bold"
+                : "text-gray-600"
+          } ${isClickable ? "cursor-pointer hover:text-gray-800 select-none" : ""}`}
+          onClick={isClickable ? onToggle : undefined}
+        >
+          {node.name}
+        </span>
+      </div>
+
+      {/* Right side: comment */}
       {node.comment && (
-        <span className="ml-2 text-gray-400 font-normal">{node.comment}</span>
+        <span className="text-gray-400 font-normal"># {node.comment}</span>
       )}
     </div>
   );

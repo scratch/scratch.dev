@@ -73,37 +73,32 @@ Scratch uses an opinionated project structure and requires **no boilerplate or c
 A simple Scratch project (created with `scratch create`) looks like this:
 
 <Files content={`
-mysite/
-.pages/ # put markdown and components here
-..index.mdx
-..Counter.tsx
-.public/ (collapsed)
-..logo.png
-..favicon.svg
+my-scratch-project/
+-pages/                 # put markdown and components here
+--index.mdx
+--Counter.tsx
+-public/ (collapsed)    # static assets
+--favicon.svg
+--scratch-logo.svg
+-src/ (collapsed)       # global components and css 
+--PageWrapper.jsx       # wraps every page
+--tailwind.css          # global styles
+--markdown/ (collapsed) # default markdown components
+---index.ts
+---CodeBlock.tsx
+---Heading.tsx
+---Link.tsx
+-AGENTS.md              # context for coding agents
+-package.json           # build and additional dependencies
+-.gitignore
 `} />
 
-Use `scratch build` to compile this project into a static website, like this one. You can change styles and customize the page wrapper component by modifying the files in the `src/` directory:
 
-<Files content={`
-mysite/
-.pages/
-.public/
-.src/
-..markdown/
-..PageWrapper.tsx
-..tailwind.css
-.package.json
-`} />
+Use `scratch build` to compile this project into a static website, like this one. 
 
-Component files and js/ts libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly imported in your .mdx files as long as the filename matches the component name.
+Component files and libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly imported in your .mdx files as long as the filename matches the component name.
 
-Scratch installs build dependencies automatically. You can add additional third-party dependencies by including a `package.json` file in your project root.
-
-## Built on Bun
-
-Scratch is built on [Bun](https://bun.com/) for lightning-fast builds, development with HMR, and native typescript support. It uses the [Tailwind CSS](https://tailwindcss.com/) framework to make component styling easy. 
-
-Scratch compiles Javascript (.js), Typescript (.ts), JSX (.jsx), TSX (.tsx), Markdown (.md), and MDX (.mdx).
+Modify `src/tailwind.css` directory to change the styling of your document. Add headers, footers and other site-wide elements by modifying `src/PageWrapper.jsx`.
 
 ## Commands
 
@@ -133,3 +128,18 @@ scratch revert --list           # list available template files
 # Update scratch to latest version
 scratch update
 ```
+
+## Acknowledgements
+
+
+Scratch is built on [Bun](https://bun.com/) for lightning-fast builds, development with HMR, and native typescript support. It uses the [Tailwind CSS](https://tailwindcss.com/) framework to make component styling easy.
+
+[React](https://react.dev/) and [MDX](https://mdxjs.com/) make it possible to write with Markdown and code.
+
+Content processing is handled by the [unified](https://unifiedjs.com/) ecosystem, with [remark-gfm](https://github.com/remarkjs/remark-gfm) for GitHub Flavored Markdown and [remark-frontmatter](https://github.com/remarkjs/remark-frontmatter) plus [gray-matter](https://github.com/jonschlinkert/gray-matter) for parsing front matter.
+
+[Shiki](https://shiki.style/) provides beautiful, accurate syntax highlighting with VS Code's grammar engine.
+
+[Commander.js](https://github.com/tj/commander.js) powers the CLI, and [fast-glob](https://github.com/mrmlnc/fast-glob) handles file discovery.
+
+Additional dependencies: [acorn](https://github.com/acornjs/acorn), [@mdx-js/esbuild](https://mdxjs.com/packages/esbuild/), [@shikijs/rehype](https://shiki.style/packages/rehype), [@types/mdast](https://github.com/DefinitelyTyped/DefinitelyTyped), [unist-util-visit](https://github.com/syntax-tree/unist-util-visit), [unist-util-is](https://github.com/syntax-tree/unist-util-is).
