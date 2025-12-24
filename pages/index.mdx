@@ -28,18 +28,17 @@ scratch dev
 
 ## What can you do with Scratch?
 
-Scratch was designed for collaborative writing with coding agents like [Claude Code](https://www.claude.com/product/claude-code). Use your favorite editor to write in [Markdown](https://daringfireball.net/projects/markdown/) and embed React components when it's easier to express yourself with code.
+Scratch lets you write in Markdown and embed interactive React components, like this counter:
 
-Scratch supports Github-flavored Markdown features like tables and todolists:
+<Counter />
 
-| Feature | Supported? |
-|---------|-----------|
-| Compiles `.md` `.mdx` `.tsx` `.ts` `.jsx` `.js` | ✅ |
-| Dev server with HMR | ✅ |
-| Tailwind CSS styling | ✅ |
-| Code syntax highlighting | ✅ |
+Scratch was designed for collaborative writing with coding agents like [Claude Code](https://www.claude.com/product/claude-code). Use your favorite editor to write in Markdown, and ask a coding agent for help when it's easier to express yourself with code.
 
-Code blocks use syntax highlighting by [Shiki](https://shiki.style/):
+You can use React components to <Fire>style text</Fire> or embed fully working demos in your product specs:
+
+<TodoList />
+
+Scratch uses [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography), to render your prose with a clean aesthetic. Code blocks use syntax highlighting by [Shiki](https://shiki.style/).
 
 ```python
 def greet(name: str) -> str:
@@ -48,13 +47,24 @@ def greet(name: str) -> str:
 print(greet("World"))
 ```
 
-You can use React components to <Fire>style text</Fire> or embed fully working demos in your product specs:
+Scratch also supports Github-flavored Markdown features like checklists and tables:
 
-<TodoList />
+| Feature | Supported? |
+|---------|-----------|
+| Compiles Markdown, TS, JS & CSS | ✅ |
+| Dev server with HMR | ✅ |
+| Tailwind CSS styling | ✅ |
+| Code syntax highlighting | ✅ |
 
-In fact, coding agents have gotten so good that if you can describe it, you can add it to a document:
+Unlike traditional word processors, Scratch makes it easy to express any idea. If you can describe it to a coding  agent, you can add it to your document:
+
+```text
+Make me a component that looks like a TV screen with a bouncing DVD logo. Count the number of times the logo hits a corner and display that below the TV.
+```
 
 <BouncingDvdLogo />
+
+Collaborating with AI makes writing more fun. Scratch makes that easy.
 
 ## No Boilerplate
 
@@ -62,37 +72,28 @@ Scratch uses an opinionated project structure and requires **no boilerplate or c
 
 A simple Scratch project (created with `scratch create`) looks like this:
 
-<Files>
-    mysite/
-    ├── pages/
-    │   ├── index.mdx
-    │   ├── Counter.tsx
-    │   └── examples/
-    │       ├── index.md
-    │       ├── markdown.md
-    │       ├── todolist-spec.mdx
-    │       └── TodoList.tsx
-    └── public/
-        ├── logo.png
-        └── favicon.svg
-</Files>
+<Files content={`
+mysite/
+.pages/
+..index.mdx
+..Counter.tsx
+.public/ (collapsed)
+..logo.png
+..favicon.svg
+`} />
 
-Use `scratch build` to compile this project into a [static website](https://scratch.dev/template).
+Use `scratch build` to compile this project into a static website, like this one. You can change styles and customize the page wrapper component by modifying the files in the `src/` directory:
 
-Scratch uses [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography), to render your prose with a clean aesthetic. Code blocks use syntax highlighting by [Shiki](https://shiki.style/).
-
-You can change styles and customize the page wrapper component by modifying the files in the `src/` directory:
-
-<Files>
-    mysite/
-    ├── pages/
-    ├── public/
-    ├── src/
-    │   ├── markdown/
-    │   ├── PageWrapper.tsx
-    │   └── tailwind.css
-    └── package.json
-</Files>
+<Files content={`
+mysite/
+.pages/
+.public/
+.src/
+..markdown/
+..PageWrapper.tsx
+..tailwind.css
+.package.json
+`} />
 
 Component files and js/ts libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly imported in your .mdx files as long as the filename matches the component name.
 
