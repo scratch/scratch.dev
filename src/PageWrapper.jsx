@@ -18,9 +18,7 @@ export default function PageWrapper({ children }) {
       </div>
       {children}
       <footer className="text-center text-gray-400 text-sm mt-16 pb-8">
-        Released under the MIT License
-        <br />
-        Copyright 2025 Pete Koomen
+        MIT License · © 2025 Pete Koomen
       </footer>
     </div>
   );
