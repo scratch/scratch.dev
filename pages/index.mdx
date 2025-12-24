@@ -79,18 +79,19 @@ A simple Scratch project (created with `scratch create`) looks like this:
 
 Use `scratch build` to compile this project into a [static website](https://scratch.dev/template).
 
-Borrowing heavily from [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography), Scratch uses default styles and Markdown components to render your prose with a clean aesthetic. Code blocks use syntax highlighting by [Shiki](https://shiki.style/).
+Scratch uses [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography), to render your prose with a clean aesthetic. Code blocks use syntax highlighting by [Shiki](https://shiki.style/).
 
-You can change styles and customize the page wrapper component by including the `src/` directory when you run `scratch create`:
+You can change styles and customize the page wrapper component by modifying the files in the `src/` directory:
 
 <Files>
     mysite/
     ├── pages/
     ├── public/
-    └── src/
-        ├── markdown/
-        ├── PageWrapper.tsx
-        └── tailwind.css
+    ├── src/
+    │   ├── markdown/
+    │   ├── PageWrapper.tsx
+    │   └── tailwind.css
+    └── package.json
 </Files>
 
 Component files and js/ts libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly imported in your .mdx files as long as the filename matches the component name.
@@ -115,6 +116,7 @@ scratch dev
 # Build for production
 scratch build
 scratch build --no-ssg        # disable static site generation
+scratch build --development   # unminified, with source maps
 
 # Preview production build locally
 scratch preview
