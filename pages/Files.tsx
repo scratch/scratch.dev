@@ -159,7 +159,7 @@ function FileRow({ node, isCollapsed, onToggle }: FileRowProps) {
     <div className="flex items-center h-7 font-mono text-sm">
       {/* Left side: indent + caret + name */}
       <div
-        className="flex items-center w-48 flex-shrink-0"
+        className="flex items-center w-52 flex-shrink-0"
         style={{ paddingLeft: `${node.depth * 1}rem` }}
       >
         {/* Caret for folders */}
@@ -202,7 +202,9 @@ function FileRow({ node, isCollapsed, onToggle }: FileRowProps) {
 
       {/* Right side: comment */}
       {node.comment && (
-        <span className="text-gray-400 font-normal whitespace-nowrap"># {node.comment}</span>
+        <span className="text-gray-400 font-normal whitespace-nowrap">
+          {node.comment}
+        </span>
       )}
     </div>
   );
