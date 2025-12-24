@@ -202,7 +202,7 @@ function FileRow({ node, isCollapsed, onToggle }: FileRowProps) {
 
       {/* Right side: comment */}
       {node.comment && (
-        <span className="text-gray-400 font-normal"># {node.comment}</span>
+        <span className="text-gray-400 font-normal whitespace-nowrap"># {node.comment}</span>
       )}
     </div>
   );
@@ -255,7 +255,7 @@ export default function Files({ content, children }: FilesProps) {
   };
 
   return (
-    <div className="not-prose my-6 py-4 px-4">
+    <div className="not-prose my-6 py-4 px-4 overflow-x-auto">
       {nodes.map((node) => (
         <FileRow
           key={node.id}
