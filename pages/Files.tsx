@@ -4,6 +4,7 @@ import React, { useState } from "react";
 interface TreeNode {
   id: string;
   name: string;
+  comment?: string;
   children: TreeNode[];
   startCollapsed: boolean;
 }
@@ -12,6 +13,7 @@ interface TreeNode {
 interface RenderNode {
   id: string;
   name: string;
+  comment?: string;
   depth: number;
   isLast: boolean;
   parentIsLast: boolean[];
@@ -28,6 +30,7 @@ function parseTree(text: string): TreeNode[] {
     const dotMatch = line.match(/^(\.+)/);
     let name: string;
     let indent: number;
+    let comment: string | undefined;
 
     if (dotMatch) {
       name = line.slice(dotMatch[1].length);
@@ -37,6 +40,13 @@ function parseTree(text: string): TreeNode[] {
       indent = line.length - line.trimStart().length;
     }
 
+    // Check for # comment
+    const commentMatch = name.match(/\s*#\s*(.*)$/);
+    if (commentMatch) {
+      comment = commentMatch[1].trim();
+      name = name.slice(0, commentMatch.index).trim();
+    }
+
     // Check for (collapsed) suffix
     const collapsedMatch = name.match(/\s*\(collapsed\)\s*$/i);
     const startCollapsed = !!collapsedMatch;
@@ -44,7 +54,7 @@ function parseTree(text: string): TreeNode[] {
       name = name.slice(0, collapsedMatch.index).trim();
     }
 
-    return { name, indent, startCollapsed, lineIndex: index };
+    return { name, indent, comment, startCollapsed, lineIndex: index };
   });
 
   // Normalize indents by subtracting the minimum
@@ -55,10 +65,11 @@ function parseTree(text: string): TreeNode[] {
   const roots: TreeNode[] = [];
   const stack: { node: TreeNode; indent: number }[] = [];
 
-  for (const { name, indent, startCollapsed, lineIndex } of items) {
+  for (const { name, indent, comment, startCollapsed, lineIndex } of items) {
     const node: TreeNode = {
       id: `node-${lineIndex}`,
       name,
+      comment,
       children: [],
       startCollapsed,
     };
@@ -93,12 +104,13 @@ function flattenTree(
   ): void {
     nodes.forEach((node, index) => {
       const isLast = index === nodes.length - 1;
-      const isFolder = node.name.endsWith("/") || !node.name.includes(".");
+      const isFolder = node.name.endsWith("/");
       const hasChildren = node.children.length > 0;
 
       result.push({
         id: node.id,
         name: node.name,
+        comment: node.comment,
         depth,
         isLast,
         parentIsLast: [...parentIsLast],
@@ -140,14 +152,14 @@ interface FileRowProps {
 }
 
 function FileRow({ node, isCollapsed, onToggle }: FileRowProps) {
-  const isClickable = node.isFolder && node.hasChildren;
+  const isClickable = node.isFolder;
 
   return (
     <div
       className="flex items-center h-7 font-mono text-sm"
       style={{ paddingLeft: `${node.depth * 1}rem` }}
     >
-      {/* Caret for folders with children */}
+      {/* Caret for folders */}
       {isClickable ? (
         <button
           onClick={onToggle}
@@ -159,7 +171,7 @@ function FileRow({ node, isCollapsed, onToggle }: FileRowProps) {
             viewBox="0 0 8 8"
             fill="none"
             stroke="currentColor"
-            strokeWidth="1.5"
+            strokeWidth="1"
             strokeLinecap="round"
             strokeLinejoin="round"
             className={isCollapsed ? "" : "rotate-90"}
@@ -173,12 +185,15 @@ function FileRow({ node, isCollapsed, onToggle }: FileRowProps) {
 
       <span
         className={`flex items-center ${
-          node.isFolder ? "text-gray-700 font-bold" : "text-gray-600"
-        } ${isClickable ? "cursor-pointer hover:text-gray-900 select-none" : ""}`}
+          node.isFolder ? "text-gray-500 font-bold" : "text-gray-600"
+        } ${isClickable ? "cursor-pointer hover:text-gray-800 select-none" : ""}`}
         onClick={isClickable ? onToggle : undefined}
       >
         {node.name}
       </span>
+      {node.comment && (
+        <span className="ml-2 text-gray-400 font-normal">{node.comment}</span>
+      )}
     </div>
   );
 }
