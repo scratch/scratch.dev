@@ -107,17 +107,14 @@ Scratch compiles Javascript (.js), Typescript (.ts), JSX (.jsx), TSX (.tsx), Mar
 
 ```bash
 # Create a new project
-scratch create my-site    # interactive
-scratch create --minimal  # omit src/ and page examples
-scratch create --full     # include src/, examples, and package.json
+scratch create [path]     # create project at path (default: current directory)
 
 # Start dev server with hot module reloading
 scratch dev
 
 # Build for production
 scratch build
-scratch build --ssg false    # disable static site generation
-scratch build --development  # unminified, with source maps
+scratch build --no-ssg        # disable static site generation
 
 # Preview production build locally
 scratch preview
@@ -126,9 +123,9 @@ scratch preview
 scratch clean
 
 # Revert a file to its template version
-scratch revert [file]    # Revert a file to its template version
-scratch revert [dir]     # Revert files in  to their template version
-scratch revert --list    # list available template files
+scratch revert [file]           # revert a file to its template version
+scratch revert [file]--force    # overwrite without confirmation
+scratch revert --list           # list available template files
 
 # Update scratch to latest version
 scratch update
