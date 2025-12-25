@@ -58,10 +58,6 @@ Scratch also supports Github-flavored Markdown features like checklists and tabl
 
 Unlike traditional word processors, Scratch makes it easy to express any idea. If you can describe it to a coding  agent, you can add it to your document:
 
-```text
-Make me a component that looks like a TV screen with a bouncing DVD logo. Count the number of times the logo hits a corner and display that below the TV.
-```
-
 <BouncingDvdLogo />
 
 Collaborating with AI makes writing more fun. Scratch makes that easy.
@@ -88,8 +84,8 @@ my-scratch-project/
 ---CodeBlock.tsx
 ---Heading.tsx
 ---Link.tsx
--AGENTS.md              # context for coding agents
--package.json           # build and additional dependencies
+-AGENTS.md              # agent context
+-package.json           # dependencies
 -.gitignore
 `} />
 
@@ -121,9 +117,9 @@ scratch preview
 scratch clean
 
 # Revert a file to its template version
-scratch revert [file]           # revert a file to its template version
-scratch revert --force [file]   # overwrite without confirmation
-scratch revert --list           # list available template files
+scratch get [file]           # revert a file to its template version
+scratch get --force [file]   # overwrite without confirmation
+scratch get --list           # list available template files
 
 # Update scratch to latest version
 scratch update
@@ -132,14 +128,14 @@ scratch update
 ## Acknowledgements
 
 
-Scratch is built on [Bun](https://bun.com/) for lightning-fast builds, development with HMR, and native typescript support. It uses the [Tailwind CSS](https://tailwindcss.com/) framework to make component styling easy.
+[Bun](https://bun.com/) for lightning-fast builds, development with HMR, native typescript support, and a portable executable.
 
-[React](https://react.dev/) and [MDX](https://mdxjs.com/) make it possible to write with Markdown and code.
+[React](https://react.dev/) and [MDX](https://mdxjs.com/) make it possible to write with Markdown and code. [Tailwind CSS](https://tailwindcss.com/) makes component styling easy.
 
-Content processing is handled by the [unified](https://unifiedjs.com/) ecosystem, with [remark-gfm](https://github.com/remarkjs/remark-gfm) for GitHub Flavored Markdown and [remark-frontmatter](https://github.com/remarkjs/remark-frontmatter) plus [gray-matter](https://github.com/jonschlinkert/gray-matter) for parsing front matter.
+Content preprocessing relies on [unified](https://unifiedjs.com/), with [remark-gfm](https://github.com/remarkjs/remark-gfm) for GitHub Flavored Markdown and [remark-frontmatter](https://github.com/remarkjs/remark-frontmatter) plus [gray-matter](https://github.com/jonschlinkert/gray-matter) for parsing front matter.
 
 [Shiki](https://shiki.style/) provides beautiful, accurate syntax highlighting with VS Code's grammar engine.
 
-[Commander.js](https://github.com/tj/commander.js) powers the CLI, and [fast-glob](https://github.com/mrmlnc/fast-glob) handles file discovery.
+[Commander.js](https://github.com/tj/commander.js) scaffolds the CLI.
 
-Additional dependencies: [acorn](https://github.com/acornjs/acorn), [@mdx-js/esbuild](https://mdxjs.com/packages/esbuild/), [@shikijs/rehype](https://shiki.style/packages/rehype), [@types/mdast](https://github.com/DefinitelyTyped/DefinitelyTyped), [unist-util-visit](https://github.com/syntax-tree/unist-util-visit), [unist-util-is](https://github.com/syntax-tree/unist-util-is).
+Additional dependencies: [fast-glob](https://github.com/mrmlnc/fast-glob), [acorn](https://github.com/acornjs/acorn), [@mdx-js/esbuild](https://mdxjs.com/packages/esbuild/), [@shikijs/rehype](https://shiki.style/packages/rehype), [@types/mdast](https://github.com/DefinitelyTyped/DefinitelyTyped), [unist-util-visit](https://github.com/syntax-tree/unist-util-visit), [unist-util-is](https://github.com/syntax-tree/unist-util-is).
