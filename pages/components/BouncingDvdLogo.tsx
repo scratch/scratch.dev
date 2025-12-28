@@ -125,7 +125,7 @@ export default function BouncingDvdLogo() {
 
             {/* Bouncing logo */}
             <div
-              className="absolute"
+              className="absolute cursor-pointer"
               style={{
                 left: position.x,
                 top: position.y,

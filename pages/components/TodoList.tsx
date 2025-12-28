@@ -8,6 +8,13 @@ interface Todo {
 
 const STORAGE_KEY = "scratch-demo-todos";
 
+const DEFAULT_TODOS: Todo[] = [
+  { id: 1, text: "Create scratch project", completed: false },
+  { id: 2, text: "Edit pages/index.mdx", completed: false },
+  { id: 3, text: "Build with `scratch build`", completed: false },
+  { id: 4, text: "Publish!", completed: false },
+];
+
 let globalTodos: Todo[] | null = null;
 let listeners: Set<(todos: Todo[]) => void> = new Set();
 
@@ -17,7 +24,7 @@ function getTodos(): Todo[] {
       globalTodos = [];
     } else {
       const stored = localStorage.getItem(STORAGE_KEY);
-      globalTodos = stored ? JSON.parse(stored) : [];
+      globalTodos = stored ? JSON.parse(stored) : DEFAULT_TODOS;
     }
   }
   return globalTodos;
@@ -72,7 +79,7 @@ function useTodos() {
   };
 
   const reset = () => {
-    updateTodos([]);
+    updateTodos([...DEFAULT_TODOS]);
   };
 
   return { todos, addTodo, toggleTodo, deleteTodo, reset };
@@ -89,30 +96,9 @@ export default function TodoList() {
 
   return (
     <div className="not-prose border border-gray-200 rounded-lg p-4 my-12 mx-2 sm:mx-8 md:mx-16 bg-gray-50">
-      <div className="flex gap-2 mb-4">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleAdd()}
-          placeholder="Add a todo..."
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 placeholder-gray-400"
-        />
-        <button
-          onClick={handleAdd}
-          className="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-700 transition-colors"
-        >
-          Add
-        </button>
-      </div>
-
-      {todos.length === 0 ? (
-        <p className="text-gray-500 text-center py-4">
-          No todos yet. Add one above!
-        </p>
-      ) : (
-        <ul className="space-y-2">
-          {todos.map((todo) => (
+      <h3 className="text-center text-lg font-semibold text-gray-900 mb-4">Todo List Demo</h3>
+      <ul className="space-y-0">
+        {todos.map((todo) => (
             <li
               key={todo.id}
               className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100"
@@ -134,7 +120,7 @@ export default function TodoList() {
               </span>
               <button
                 onClick={() => deleteTodo(todo.id)}
-                className="text-gray-400 hover:text-red-500 transition-colors"
+                className="text-gray-400 hover:text-black transition-colors"
                 aria-label="Delete todo"
               >
                 <svg
@@ -152,10 +138,24 @@ export default function TodoList() {
               </button>
             </li>
           ))}
-        </ul>
-      )}
+        <li className="flex items-center gap-3 p-2">
+          <input
+            type="checkbox"
+            disabled
+            className="w-4 h-4 rounded border-gray-300"
+          />
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleAdd()}
+            placeholder="Add a todo..."
+            className="flex-1 bg-transparent border-b border-transparent text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-300"
+          />
+        </li>
+      </ul>
 
-      <div className="mt-4 pt-4 border-t border-gray-200 flex justify-between items-center">
+      <div className="mt-4 pt-4 flex justify-between items-center">
         <span className="text-sm text-gray-500">
           {todos.filter((t) => !t.completed).length} remaining
         </span>
