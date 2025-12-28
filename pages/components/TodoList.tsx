@@ -79,7 +79,7 @@ function useTodos() {
   };
 
   const reset = () => {
-    updateTodos([]);
+    updateTodos([...DEFAULT_TODOS]);
   };
 
   return { todos, addTodo, toggleTodo, deleteTodo, reset };

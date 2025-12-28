@@ -1,6 +1,366 @@
 ---
-title: Docs
-description: Documentation for Scratch
+title: Documentation
+description: Complete documentation for the Scratch CLI
 ---
 
 # Documentation
+
+## Quick Start
+
+Scratch requires no configuration so it's easy to get started:
+
+```bash
+# Install scratch
+curl -fsSL https://scratch.dev/install.sh | bash
+
+# Create a new project
+scratch create
+
+# Start the dev server
+scratch dev
+```
+
+Now you're ready to start writing in `pages/index.mdx`.
+
+## Project Structure
+
+Scratch uses an opinionated project structure and requires **no boilerplate or configuration**: just create a project, run the dev server, and start writing.
+
+A simple Scratch project (created with `scratch create`) looks like this:
+
+<Files>
+```
+my-scratch-project/
+  pages/                 # put markdown and components here
+    posts/ (collapsed)
+      post1.md           # accessible at /posts/post1 
+      post2.md           # /posts/post2
+      blog.png           # static assets in pages/ or public/
+    index.mdx            # accessible at root path (/)
+    Counter.tsx
+  public/ (collapsed)    # static assets
+    favicon.svg
+  src/ (collapsed)       # global components and css
+    PageWrapper.jsx       # wraps every page
+    tailwind.css          # global styles
+    markdown/ (collapsed) # default markdown components
+      index.ts
+      CodeBlock.tsx
+      Heading.tsx
+      Link.tsx
+  AGENTS.md              # agent context
+  package.json           # dependencies
+  .gitignore
+```
+</Files>
+
+Use `scratch build` to compile this project into a static website, like [this one](https://github.com/scratch/scratch.dev).
+
+### pages/
+
+Markdown files live in `pages/` and can be either MDX (`.mdx`) or vanilla Markdown (`.md`).
+
+Scratch compiles Markdown file into a static web page whose route is determined by your project's directory structure:
+- `pages/index.mdx` will be served at the root path (`/`)
+- `pages/posts/post1.md` will be served at `pages/posts/post1`
+
+Component files and libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly imported in your Markdown files as long as the component name (`Counter`) matches the component name (`Counter.jsx` or `Counter.tsx`).
+
+`pages/` can also contain static content like images.  
+
+
+Modify `src/tailwind.css` to change the styling of your document. Add headers, footers and other site-wide elements by modifying `src/PageWrapper.jsx`.
+
+### URL Path Resolution
+
+| File | URL |
+|------|-----|
+| `pages/index.mdx` | `/` |
+| `pages/about.mdx` | `/about/` |
+| `pages/posts/index.mdx` | `/posts/` |
+| `pages/posts/hello.mdx` | `/posts/hello/` |
+
+## Commands
+
+### scratch create
+
+Create a new Scratch project.
+
+```bash
+scratch create [path]
+```
+
+**Options:**
+- `--no-src` - Skip the src/ template directory
+- `--no-package` - Skip package.json template
+- `--no-example` - Skip example content files
+
+### scratch dev
+
+Start the development server with live reload.
+
+```bash
+scratch dev [path]
+```
+
+**Options:**
+- `-p, --port <port>` - Port for dev server (default: 5173)
+- `-n, --no-open` - Don't open browser automatically
+- `-d, --development` - Development mode (unminified, with source maps)
+- `-b, --base <path>` - Base path for deployment (e.g., `/mysite/`)
+- `--static <mode>` - Static file mode: `public`, `assets`, `all`
+- `--strict` - Disable auto-injection of PageWrapper and imports
+- `--highlight <mode>` - Syntax highlighting: `off`, `popular`, `auto`, `all`
+
+### scratch build
+
+Build the project for production.
+
+```bash
+scratch build [path]
+```
+
+**Options:**
+- `-o, --out-dir <path>` - Output directory (default: `dist`)
+- `-d, --development` - Development mode (unminified, with source maps)
+- `-b, --base <path>` - Base path for deployment
+- `--no-ssg` - Disable static site generation
+- `--static <mode>` - Static file mode: `public`, `assets`, `all`
+- `--strict` - Disable auto-injection of PageWrapper and imports
+- `--highlight <mode>` - Syntax highlighting mode
+
+### scratch preview
+
+Preview the production build locally.
+
+```bash
+scratch preview [path]
+```
+
+**Options:**
+- `-p, --port <port>` - Port for preview server (default: 4173)
+- `-n, --no-open` - Don't open browser automatically
+
+### scratch view
+
+Quick preview of a single file or directory.
+
+```bash
+scratch view <path>
+```
+
+**Options:**
+- `-p, --port <port>` - Port for dev server (default: 5173)
+- `-n, --no-open` - Don't open browser automatically
+
+Useful for viewing individual `.md` or `.mdx` files without setting up a full project.
+
+### scratch clean
+
+Remove build artifacts.
+
+```bash
+scratch clean [path]
+```
+
+Removes the `dist/` and `.scratch-build-cache/` directories.
+
+### scratch checkout
+
+Restore template files from built-in templates.
+
+```bash
+scratch checkout [file]
+```
+
+**Options:**
+- `-l, --list` - List all available template files
+- `-f, --force` - Overwrite existing files without confirmation
+
+### scratch update
+
+Update Scratch to the latest version.
+
+```bash
+scratch update
+```
+
+### Global Options
+
+These options work with all commands:
+
+- `-v, --verbose` - Verbose output for debugging
+- `-q, --quiet` - Quiet mode (errors only)
+- `--show-bun-errors` - Show full Bun error stack traces
+- `--version` - Show CLI version
+
+## Writing Content
+
+### Frontmatter
+
+Add YAML frontmatter to set page metadata:
+
+```mdx
+---
+title: My Page
+description: A description for SEO
+image: /og-image.png
+keywords: ["react", "markdown"]
+author: Your Name
+---
+```
+
+These are automatically injected as HTML meta tags.
+
+### Using Components
+
+Components in `src/` or `pages/` are automatically available in MDX files:
+
+```mdx
+# My Page
+
+<Counter />
+
+<Button>Click me</Button>
+```
+
+The component filename must match the component name (e.g., `Counter.tsx` exports `Counter`).
+
+### Component Patterns
+
+**Self-closing** (wrapped in `not-prose` div):
+```mdx
+<Chart />
+```
+
+**Inline children:**
+```mdx
+<Button>Click me</Button>
+```
+
+**Block children** (requires blank lines):
+```mdx
+<Callout>
+
+## Warning
+
+This is **markdown** inside a component.
+
+</Callout>
+```
+
+## Styling
+
+### Tailwind CSS
+
+Scratch uses Tailwind CSS. Edit `src/tailwind.css` for global styles:
+
+```css
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+/* Custom styles */
+.prose a {
+  @apply text-blue-600 hover:text-blue-800;
+}
+```
+
+### Typography
+
+Markdown content is styled with [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography). Use prose modifiers in `PageWrapper.jsx`:
+
+```jsx
+<div className="prose prose-lg prose-slate">
+  {children}
+</div>
+```
+
+Element modifiers: `prose-h1:`, `prose-a:`, `prose-p:`, `prose-code:`, `prose-pre:`, etc.
+
+### Excluding from Prose
+
+Use the `not-prose` class to exclude elements from typography styling:
+
+```jsx
+<div className="not-prose">
+  <CustomComponent />
+</div>
+```
+
+## PageWrapper
+
+Create `src/PageWrapper.jsx` to wrap all pages with a layout:
+
+```jsx
+export default function PageWrapper({ children }) {
+  return (
+    <div className="max-w-2xl mx-auto p-8">
+      <nav>...</nav>
+      <main className="prose">{children}</main>
+      <footer>...</footer>
+    </div>
+  );
+}
+```
+
+## Custom Markdown Components
+
+Override default markdown rendering by creating components in `src/markdown/`:
+
+```tsx
+// src/markdown/Link.tsx
+export default function Link({ href, children, ...props }) {
+  const isExternal = href?.startsWith('http');
+  return (
+    <a
+      href={href}
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noopener noreferrer' : undefined}
+      {...props}
+    >
+      {children}
+    </a>
+  );
+}
+```
+
+Export from `src/markdown/index.ts`:
+
+```ts
+export { default as a } from './Link';
+export { default as pre } from './CodeBlock';
+export { default as h1, default as h2 } from './Heading';
+```
+
+## Syntax Highlighting
+
+Code blocks are highlighted with [Shiki](https://shiki.style/). Control highlighting with the `--highlight` flag:
+
+- `off` - No syntax highlighting
+- `popular` - Common languages only
+- `auto` - Detect from code blocks (default)
+- `all` - All languages
+
+## Deployment
+
+Build your site and deploy the `dist/` folder to any static host:
+
+```bash
+scratch build
+```
+
+For subdirectory deployment, use the `--base` flag:
+
+```bash
+scratch build --base /my-site/
+```
+
+## Generated Files
+
+Add these to `.gitignore`:
+
+```
+dist/
+.scratch-build-cache/
+node_modules/
+```

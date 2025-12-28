@@ -20,7 +20,7 @@ Scratch was designed for collaborative writing with coding agents like [Claude C
 
 ## Quick Start
 
-Scratch requires no configuration so it's easy to get started
+Scratch requires no configuration so it's easy to get started:
 
 ```bash
 # Install scratch
@@ -33,17 +33,19 @@ scratch create
 scratch dev
 ```
 
+Now you're ready to start writing in `pages/index.mdx`.
+
 ## What can you do with Scratch?
 
-Scratch embed interactive React components into your writing, like this counter:
+Scratch lets you embed interactive React components into your writing, like this counter:
 
 <Counter />
 
-You can use React components to <Fire>style text</Fire> or embed fully working demos in your product specs:
+You can use components to <Fire>style text</Fire> or embed fully working demos in your product specs:
 
 <TodoList />
 
-Scratch uses [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography), to render your prose with a clean aesthetic. Code blocks use syntax highlighting by [Shiki](https://shiki.style/).
+Scratch uses [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography) to render your prose with a clean aesthetic. It supports [Github-flavored Markdown](https://github.com/remarkjs/remark-gfm) out of the box. Code blocks use syntax highlighting by [Shiki](https://shiki.style/).
 
 ```python
 def greet(name: str) -> str:
@@ -52,84 +54,11 @@ def greet(name: str) -> str:
 print(greet("World"))
 ```
 
-Scratch also supports Github-flavored Markdown features like checklists and tables:
-
-| Feature | Supported? |
-|---------|-----------|
-| Compiles Markdown, TS, JS & CSS | ✅ |
-| Dev server with HMR | ✅ |
-| Tailwind CSS styling | ✅ |
-| Code syntax highlighting | ✅ |
-
 Unlike traditional word processors, Scratch makes it easy to express any idea. If you can describe it to a coding  agent, you can add it to your document:
 
 <BouncingDvdLogo />
 
 Collaborating with AI makes writing more fun. Scratch makes that easy.
-
-## No Boilerplate
-
-Scratch uses an opinionated project structure and requires **no boilerplate or configuration**: just create a project, run the dev server with `scratch dev`, and start writing.
-
-A simple Scratch project (created with `scratch create`) looks like this:
-
-<Files content={`
-my-scratch-project/
--pages/                 # put markdown and components here
---index.mdx
---Counter.tsx
--public/ (collapsed)    # static assets
---favicon.svg
---scratch-logo.svg
--src/ (collapsed)       # global components and css 
---PageWrapper.jsx       # wraps every page
---tailwind.css          # global styles
---markdown/ (collapsed) # default markdown components
----index.ts
----CodeBlock.tsx
----Heading.tsx
----Link.tsx
--AGENTS.md              # agent context
--package.json           # dependencies
--.gitignore
-`} />
-
-
-Use `scratch build` to compile this project into a static website, like [this one](https://github.com/scratch/scratch.dev). 
-
-Component files and libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly imported in your .mdx files as long as the filename matches the component name.
-
-Modify `src/tailwind.css` directory to change the styling of your document. Add headers, footers and other site-wide elements by modifying `src/PageWrapper.jsx`.
-
-## Commands
-
-```bash
-# Create a new project
-scratch create [path]     # create project
-
-# Start dev server with hot module reloading
-scratch dev
-
-# Build for production
-scratch build
-
-# Preview production build locally
-scratch preview
-
-# Serve target file/directory on dev server 
-scratch view path
-
-# Remove build artifacts
-scratch clean
-
-# Revert a file to its template version
-scratch checkout [file]           # revert a file to its template version
-scratch checkout --force [file]   # overwrite without confirmation
-scratch checkout --list           # list available template files
-
-# Update scratch to latest version
-scratch update
-```
 
 ## Acknowledgements
 
