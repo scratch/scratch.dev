@@ -10,6 +10,8 @@ lang: "en"
 
 # Documentation
 
+<DocsSidebar />
+
 ## Quick Start
 
 Scratch requires no configuration so it's easy to get started:
@@ -357,6 +359,65 @@ Code blocks are highlighted with [Shiki](https://shiki.style/). Control highligh
 - `popular` - Common languages only
 - `auto` - Detect from code blocks (default)
 - `all` - All languages
+
+## Build Pipeline
+
+When you run `scratch build`, Scratch compiles your MDX files into a **fully static website**. There's no server-side code running in production—everything is pre-rendered HTML, CSS, and JavaScript that can be hosted on any static file server.
+
+Scratch supports defaults that make it easy to create beautiful & functional websites with your writing. Here's a description of the Scratch build pipeline:
+
+### Build Steps
+
+#### 1. Dependency Resolution
+
+Scratch auto-installs npm dependencies from your `package.json` using Bun. Dependencies are cached in `.scratch-build-cache/` for faster subsequent builds.
+
+#### 2. Entry Generation
+
+For each `.mdx` or `.md` file in `pages/`, Scratch generates client and server entry files that import your content and wire up React rendering.
+
+#### 3. MDX Compilation
+
+MDX files are compiled through a pipeline of remark and rehype plugins:
+
+**Remark plugins** (process Markdown AST):
+- **remark-gfm** - GitHub Flavored Markdown (tables, strikethrough, task lists)
+- **remark-frontmatter** - Extracts YAML frontmatter for page metadata
+- **remark-auto-import** - Automatically imports components used in MDX without explicit import statements
+- **remark-not-prose** - Wraps self-closing components in `not-prose` divs to prevent Tailwind Typography styles from affecting them
+
+**Rehype plugins** (process HTML AST):
+- **rehype-raw** - Allows raw HTML in Markdown while preserving MDX nodes
+- **rehype-image-paths** - Transforms relative image paths to absolute routes, handles base paths for subdirectory deployments
+- **rehype-shiki** - Syntax highlighting using Shiki with configurable language detection
+- **rehype-footnotes** - Moves footnotes inside PageWrapper for proper styling
+
+#### 4. Tailwind Compilation
+
+Scratch compiles your CSS using Tailwind CSS v4. Only the utilities actually used in your content are included in the final bundle.
+
+#### 5. Server Build
+
+Scratch builds a server bundle to pre-render each page. Scratch generats static website and bundle is only used during the build process--it doesn't actually run on a server.
+
+#### 6. Client Build
+
+The client JavaScript is bundled with Bun's bundler. Output is minified for production with content-hashed filenames for cache busting.
+
+#### 7. HTML Generation
+
+Each page is rendered to static HTML with:
+- Pre-rendered content from the server build
+- Injected CSS and JS bundle references
+- Meta tags from frontmatter (title, description, og:image, etc.)
+
+#### 8. Static Assets
+
+Files from `public/` are copied to the output directory.
+
+#### 9. Output
+
+The final static site is written to `dist/`, ready for deployment to any static host.
 
 ## Deployment
 
