@@ -22,13 +22,25 @@ export default function DocsSidebar() {
           .replace(/[^a-z0-9]+/g, "-")
           .replace(/(^-|-$)/g, "") || "";
       }
+      // Get text content, filtering out the # anchor
+      let text = h2.textContent || "";
+      text = text.replace(/^#\s*/, "").trim();
       items.push({
         id: h2.id,
-        text: h2.textContent || "",
+        text,
       });
     });
 
     setHeadings(items);
+
+    // Scroll to hash after IDs are set
+    if (window.location.hash) {
+      const id = window.location.hash.slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => el.scrollIntoView(), 0);
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -54,7 +66,7 @@ export default function DocsSidebar() {
   if (headings.length === 0) return null;
 
   return (
-    <nav className="hidden xl:block fixed top-32 w-48 text-sm" style={{ right: "calc(50% + 22rem)" }}>
+    <nav className="hidden xl:block fixed top-48 w-48 text-sm" style={{ right: "calc(50% + 24rem)" }}>
       <ul className="space-y-2">
         {headings.map(({ id, text }) => (
           <li key={id}>
