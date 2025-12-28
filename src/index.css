@@ -23,7 +23,7 @@
 
 /* Inline code - add background and padding, remove backticks */
 .prose :where(code):not(:where([class~='not-prose'], pre *)) {
-  @apply text-gray-900 font-medium text-[0.9em] bg-gray-100 px-1.5 py-0.5 rounded;
+  @apply text-gray-700 font-medium text-[0.9em] bg-gray-50 px-1.5 py-0.5 rounded;
 }
 
 .prose :where(code):not(:where([class~='not-prose'], pre *))::before,

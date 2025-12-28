@@ -1,6 +1,11 @@
 ---
-title: Documentation
-description: Complete documentation for the Scratch CLI
+title: "Scratch - Documentation"
+image: "/scratch-logo.svg"
+description: "Complete documentation for the Scratch CLI"
+keywords: ["MDX", "static site", "React", "Bun", "markdown"]
+author: "Scratch"
+type: "website"
+lang: "en"
 ---
 
 # Documentation
@@ -26,7 +31,7 @@ Now you're ready to start writing in `pages/index.mdx`.
 
 Scratch uses an opinionated project structure and requires **no boilerplate or configuration**: just create a project, run the dev server, and start writing.
 
-A simple Scratch project (created with `scratch create`) looks like this:
+A simple Scratch project (created with `scratch create my-scratch-project`) looks like this:
 
 <Files>
 ```
@@ -41,13 +46,13 @@ my-scratch-project/
   public/ (collapsed)    # static assets
     favicon.svg
   src/ (collapsed)       # global components and css
-    PageWrapper.jsx       # wraps every page
-    tailwind.css          # global styles
     markdown/ (collapsed) # default markdown components
       index.ts
       CodeBlock.tsx
       Heading.tsx
       Link.tsx
+    PageWrapper.jsx       # wraps every page
+    tailwind.css          # global styles
   AGENTS.md              # agent context
   package.json           # dependencies
   .gitignore
@@ -61,24 +66,33 @@ Use `scratch build` to compile this project into a static website, like [this on
 Markdown files live in `pages/` and can be either MDX (`.mdx`) or vanilla Markdown (`.md`).
 
 Scratch compiles Markdown file into a static web page whose route is determined by your project's directory structure:
-- `pages/index.mdx` will be served at the root path (`/`)
-- `pages/posts/post1.md` will be served at `pages/posts/post1`
-
-Component files and libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly imported in your Markdown files as long as the component name (`Counter`) matches the component name (`Counter.jsx` or `Counter.tsx`).
-
-`pages/` can also contain static content like images.  
-
-
-Modify `src/tailwind.css` to change the styling of your document. Add headers, footers and other site-wide elements by modifying `src/PageWrapper.jsx`.
-
-### URL Path Resolution
-
 | File | URL |
 |------|-----|
 | `pages/index.mdx` | `/` |
 | `pages/about.mdx` | `/about/` |
 | `pages/posts/index.mdx` | `/posts/` |
 | `pages/posts/hello.mdx` | `/posts/hello/` |
+
+Component files and libraries can live anywhere in `pages/` and `src/`. They are auto-detected by Scratch and don't need to be explicitly imported in your Markdown files as long as the component name (`Counter`) matches the component name (`Counter.jsx` or `Counter.tsx`).
+
+`pages/` can also contain static content like images. These are copied directly into your output directory (`dist/`) and will be served the same way your compiled Markdown is.
+
+### public/
+
+Add static content like a favicon or `_redirects` file to the `public/` directory. These are copied directly into your output directory (`dist/`) just like static content in `pages/`.
+
+### src/
+
+`src/` is for CSS files, components and JS/TS libraries. New Scratch projects will contain the following:
+
+- `src/PageWrapper.jsx` - your Markdown contents will be "wrapped" with this component. Modify it to change page headers, footers, nav bars and other global components.
+- `src/tailwind.css` - global styles. Edit this to change the look and feel of your compiled Markdown.
+- `src/markdown` - a directory containing default Markdown components. For example, edit `src/markdown/CodeBlock.tsx` to change how compiled code blocks 
+
+
+### package.json
+
+Scratch automatically installs build dependences. You can add additional dependencies by editing `package.json`.
 
 ## Commands
 
@@ -90,7 +104,7 @@ Create a new Scratch project.
 scratch create [path]
 ```
 
-**Options:**
+Options:
 - `--no-src` - Skip the src/ template directory
 - `--no-package` - Skip package.json template
 - `--no-example` - Skip example content files
@@ -103,14 +117,17 @@ Start the development server with live reload.
 scratch dev [path]
 ```
 
-**Options:**
+Options:
 - `-p, --port <port>` - Port for dev server (default: 5173)
 - `-n, --no-open` - Don't open browser automatically
 - `-d, --development` - Development mode (unminified, with source maps)
 - `-b, --base <path>` - Base path for deployment (e.g., `/mysite/`)
-- `--static <mode>` - Static file mode: `public`, `assets`, `all`
+- `--static <mode>` - Static file mode: 
+  - `public` - ignore static assets in `pages/`
+  - `assets` (default) - serve assets like images, but not javascript or typescript code files like `lib.js`
+  - `all` - serve assets _and_ code files statically
 - `--strict` - Disable auto-injection of PageWrapper and imports
-- `--highlight <mode>` - Syntax highlighting: `off`, `popular`, `auto`, `all`
+- `--highlight <mode>` - Syntax highlighting supported languages: `off`, `popular`, `auto` (default), `all`
 
 ### scratch build
 
@@ -120,7 +137,7 @@ Build the project for production.
 scratch build [path]
 ```
 
-**Options:**
+Options:
 - `-o, --out-dir <path>` - Output directory (default: `dist`)
 - `-d, --development` - Development mode (unminified, with source maps)
 - `-b, --base <path>` - Base path for deployment
@@ -143,13 +160,13 @@ scratch preview [path]
 
 ### scratch view
 
-Quick preview of a single file or directory.
+Quick preview of a single file or directory. Handy for e.g. reading `README.md` files.
 
 ```bash
 scratch view <path>
 ```
 
-**Options:**
+Options:
 - `-p, --port <port>` - Port for dev server (default: 5173)
 - `-n, --no-open` - Don't open browser automatically
 
@@ -173,7 +190,7 @@ Restore template files from built-in templates.
 scratch checkout [file]
 ```
 
-**Options:**
+Options:
 - `-l, --list` - List all available template files
 - `-f, --force` - Overwrite existing files without confirmation
 

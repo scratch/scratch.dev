@@ -6,7 +6,6 @@ export default function Header() {
       </a>
       <nav className="flex gap-6">
         <a href="/docs/" className="opacity-30 hover:opacity-100 transition-opacity">Docs</a>
-        <a href="/about/" className="opacity-30 hover:opacity-100 transition-opacity">About</a>
       </nav>
       <div className="flex gap-4">
         <a href="https://github.com/scratch/scratch" target="_blank" rel="noopener noreferrer" className="opacity-30 hover:opacity-100 transition-opacity">
