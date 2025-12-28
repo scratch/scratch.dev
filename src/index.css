@@ -16,8 +16,8 @@
   @apply no-underline hover:underline;
 }
 
-/* Headings - add top margin and center */
-.prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~='not-prose'] *)) {
+/* H1 - center and add extra top margin */
+.prose :where(h1):not(:where([class~='not-prose'] *)) {
   @apply text-center mt-24;
 }
 
