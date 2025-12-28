@@ -67,7 +67,7 @@ Use `scratch build` to compile this project into a static website, like [this on
 
 Markdown files live in `pages/` and can be either MDX (`.mdx`) or vanilla Markdown (`.md`).
 
-Scratch compiles Markdown file into a static web page whose route is determined by your project's directory structure:
+Scratch compiles each Markdown file into a static web page whose route is determined by your project's directory structure:
 | File | URL |
 |------|-----|
 | `pages/index.mdx` | `/` |
@@ -89,12 +89,12 @@ Add static content like a favicon or `_redirects` file to the `public/` director
 
 - `src/PageWrapper.jsx` - your Markdown contents will be "wrapped" with this component. Modify it to change page headers, footers, nav bars and other global components.
 - `src/tailwind.css` - global styles. Edit this to change the look and feel of your compiled Markdown.
-- `src/markdown` - a directory containing default Markdown components. For example, edit `src/markdown/CodeBlock.tsx` to change how compiled code blocks 
+- `src/markdown` - a directory containing default Markdown components. For example, edit `src/markdown/CodeBlock.tsx` to change how Markdown code blocks are rendered.
 
 
 ### package.json
 
-Scratch automatically installs build dependences. You can add additional dependencies by editing `package.json`.
+Scratch automatically installs build dependencies. You can add additional dependencies by editing `package.json`.
 
 ## Commands
 
@@ -398,7 +398,7 @@ Scratch compiles your CSS using Tailwind CSS v4. Only the utilities actually use
 
 #### 5. Server Build
 
-Scratch builds a server bundle to pre-render each page. Scratch generats static website and bundle is only used during the build process--it doesn't actually run on a server.
+Scratch builds a server bundle to pre-render each page. The "server bundle" doesn't actually run on a server; it's only used during the build process to generate pre-rendered HTML.
 
 #### 6. Client Build
 
