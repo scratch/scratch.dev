@@ -150,7 +150,7 @@ export default function TodoList() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleAdd()}
             placeholder="Add a todo..."
-            className="flex-1 bg-transparent border-b border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-500"
+            className="flex-1 bg-transparent border-b border-transparent text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-300"
           />
         </li>
       </ul>
