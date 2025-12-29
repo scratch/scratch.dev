@@ -18,7 +18,7 @@
 
 /* H1 - center and add extra top margin */
 .prose :where(h1):not(:where([class~='not-prose'] *)) {
-  @apply text-center mt-24;
+  @apply text-center mt-16;
 }
 
 /* Inline code - add background and padding, remove backticks */
