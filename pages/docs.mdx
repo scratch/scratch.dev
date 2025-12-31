@@ -1,11 +1,20 @@
 ---
-title: "Scratch - Documentation"
-image: "/scratch-logo.svg"
-description: "Complete documentation for the Scratch CLI"
-keywords: ["MDX", "static site", "React", "Bun", "markdown"]
-author: "Scratch"
-type: "website"
-lang: "en"
+# Basic metadata
+title: "Scratch - Documentation"      # Page title (<title>, og:title, twitter:title)
+description: "Complete documentation for the Scratch CLI"  # SEO description
+keywords: ["MDX", "static site", "React", "Bun", "markdown"]  # SEO keywords
+author: "Scratch"                     # Page author
+robots: "index, follow"               # Search engine directives
+lang: "en"                            # HTML lang attribute
+canonical: "https://scratch.dev/docs/"  # Canonical URL (<link rel="canonical">)
+
+# Open Graph (social sharing)
+image: "https://scratch.dev/scratch-social.png"  # Social sharing image (og:image, twitter:image)
+url: "https://scratch.dev/docs/"      # Open Graph URL (og:url)
+type: "website"                       # Content type (og:type) - "website" or "article"
+siteName: "Scratch"                   # Site name (og:site_name)
+locale: "en_US"                       # Locale (og:locale)
+siteUrl: "https://scratch.dev"        # Base URL for resolving relative image paths
 ---
 
 # Documentation
@@ -217,19 +226,70 @@ These options work with all commands:
 
 ### Frontmatter
 
-Add YAML frontmatter to set page metadata:
+Add YAML frontmatter at the top of your MDX files to set page metadata. These properties are automatically converted to HTML meta tags for SEO and social sharing.
 
-```mdx
+#### Basic Properties
+
+| Property | Description |
+|----------|-------------|
+| `title` | Page title. Sets `<title>`, `og:title`, and `twitter:title` |
+| `description` | Page description for SEO. Sets meta description, `og:description`, and `twitter:description` |
+| `keywords` | Keywords for SEO. Can be a string or array (arrays are joined with ", ") |
+| `author` | Page author. Sets `meta[name="author"]` |
+| `robots` | Robots directive (e.g., `"index, follow"`) |
+| `lang` | HTML language attribute (e.g., `"en"`) |
+| `canonical` | Canonical URL. Sets `<link rel="canonical">` |
+
+#### Open Graph Properties
+
+| Property | Description | Default |
+|----------|-------------|---------|
+| `image` | Social sharing image URL. Sets `og:image` and `twitter:image` | - |
+| `url` | Canonical Open Graph URL. Sets `og:url` | - |
+| `type` | Content type. Sets `og:type` | `"article"` |
+| `siteName` | Site name. Sets `og:site_name` | - |
+| `locale` | Locale (e.g., `"en_US"`). Sets `og:locale` | - |
+| `siteUrl` | Base URL for resolving relative image paths | - |
+
+#### Twitter Card Properties
+
+| Property | Description | Default |
+|----------|-------------|---------|
+| `twitterCard` | Card type. Sets `twitter:card` | `"summary_large_image"` |
+| `twitterSite` | Site's Twitter handle (e.g., `"@mysite"`). Sets `twitter:site` | - |
+| `twitterCreator` | Author's Twitter handle. Sets `twitter:creator` | - |
+
+#### Article Properties
+
+| Property | Description |
+|----------|-------------|
+| `publishDate` | Publication date (ISO format). Sets `article:published_time` |
+| `modifiedDate` | Last modified date (ISO format). Sets `article:modified_time` |
+| `tags` | Article tags. Can be string or array. Sets `article:tag` |
+
+#### Example
+
+```yaml
 ---
-title: My Page
-description: A description for SEO
-image: /og-image.png
-keywords: ["react", "markdown"]
-author: Your Name
+title: "My Page Title"
+description: "A brief description for SEO and social sharing"
+keywords: ["react", "markdown", "static site"]
+author: "Your Name"
+image: "/og-image.png"
+type: "article"
+siteName: "My Site"
+locale: "en_US"
+twitterCard: "summary_large_image"
+twitterSite: "@mysite"
+publishDate: "2025-01-01"
+tags: ["tutorial", "guide"]
+canonical: "https://example.com/my-page"
+lang: "en"
+siteUrl: "https://example.com"
 ---
 ```
 
-These are automatically injected as HTML meta tags.
+**Note:** Image URLs can be absolute (starting with `http://` or `https://`) or relative paths. Relative paths are resolved against `siteUrl` if provided.
 
 ### Using Components
 

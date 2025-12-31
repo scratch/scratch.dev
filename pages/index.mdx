@@ -1,11 +1,20 @@
 ---
-title: "Scratch"
-image: "/scratch-logo.svg"
-description: "Write with Markdown and React"
-keywords: ["MDX", "static site", "React", "Bun", "markdown"]
-author: "Scratch"
-type: "website"
-lang: "en"
+# Basic metadata
+title: "Scratch"                      # Page title (<title>, og:title, twitter:title)
+description: "Write with Markdown and React"  # SEO description
+keywords: ["MDX", "static site", "React", "Bun", "markdown"]  # SEO keywords
+author: "Scratch"                     # Page author
+robots: "index, follow"               # Search engine directives
+lang: "en"                            # HTML lang attribute
+canonical: "https://scratch.dev/"     # Canonical URL (<link rel="canonical">)
+
+# Open Graph (social sharing)
+image: "https://scratch.dev/scratch-social.png"  # Social sharing image (og:image, twitter:image)
+url: "https://scratch.dev/"           # Open Graph URL (og:url)
+type: "website"                       # Content type (og:type) - "website" or "article"
+siteName: "Scratch"                   # Site name (og:site_name)
+locale: "en_US"                       # Locale (og:locale)
+siteUrl: "https://scratch.dev"        # Base URL for resolving relative image paths
 ---
 
 <div className="not-prose flex flex-col items-center justify-center mb-8 mt-16">
@@ -16,7 +25,7 @@ Scratch is a tool for writing with [Markdown](https://daringfireball.net/project
 
 Write in Markdown and embed React components right in your text. Scratch compiles your work into beautiful static websites (like [this one](https://github.com/scratch/scratch.dev)) that can be hosted anywhere.
 
-Scratch was designed for collaborative writing with coding agents like [Claude Code](https://www.claude.com/product/claude-code). Use your favorite editor to write in Markdown, and ask an agent for help when it's easier to express yourself with code.
+Scratch was designed for collaborative writing with coding agents like [Claude Code](https://www.claude.com/product/claude-code). Use your favorite editor to write in Markdown and ask an agent for help when it's easier to express yourself with code.
 
 
 ## Quick Start
