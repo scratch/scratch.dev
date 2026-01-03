@@ -47,9 +47,9 @@ A simple Scratch project (created with `scratch create my-scratch-project`) look
 <Files>
 ```
 my-scratch-project/
-  pages/                 # put markdown and components here
+  pages/                 # put markdown pages and components here
     posts/ (collapsed)
-      post1.md           # accessible at /posts/post1 
+      post1.md           # accessible at /posts/post1
       post2.md           # /posts/post2
       blog.png           # static assets in pages/ or public/
     index.mdx            # accessible at root path (/)
@@ -62,7 +62,12 @@ my-scratch-project/
       CodeBlock.tsx
       Heading.tsx
       Link.tsx
-    PageWrapper.jsx       # wraps every page
+    template/ (collapsed) # page template components
+      Copyright.jsx
+      Footer.jsx
+      Header.jsx
+      PageWrapper.jsx       # wraps every page
+      ScratchBadge.jsx
     tailwind.css          # global styles
   AGENTS.md              # agent context
   package.json           # dependencies
@@ -96,7 +101,8 @@ Add static content like a favicon or `_redirects` file to the `public/` director
 
 `src/` is for CSS files, components and JS/TS libraries. New Scratch projects will contain the following:
 
-- `src/PageWrapper.jsx` - your Markdown contents will be "wrapped" with this component. Modify it to change page headers, footers, nav bars and other global components.
+- `src/template/PageWrapper.jsx` - your Markdown contents will be "wrapped" with this component. Modify it to change page headers, footers, nav bars and other global components.
+- `src/template/` - contains page template components like `Header.jsx`, `Footer.jsx`, `Copyright.jsx`, and `ScratchBadge.jsx`.
 - `src/tailwind.css` - global styles. Edit this to change the look and feel of your compiled Markdown.
 - `src/markdown` - a directory containing default Markdown components. For example, edit `src/markdown/CodeBlock.tsx` to change how Markdown code blocks are rendered.
 
@@ -346,7 +352,7 @@ Scratch uses Tailwind CSS. Edit `src/tailwind.css` for global styles:
 
 ### Typography
 
-Markdown content is styled with [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography). Use prose modifiers in `PageWrapper.jsx`:
+Markdown content is styled with [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography). Use prose modifiers in `src/template/PageWrapper.jsx`:
 
 ```jsx
 <div className="prose prose-lg prose-slate">
@@ -368,7 +374,7 @@ Use the `not-prose` class to exclude elements from typography styling:
 
 ## PageWrapper
 
-Create `src/PageWrapper.jsx` to wrap all pages with a layout:
+Create `src/template/PageWrapper.jsx` to wrap all pages with a layout:
 
 ```jsx
 export default function PageWrapper({ children }) {
